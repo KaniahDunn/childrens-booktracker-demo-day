@@ -25,12 +25,21 @@ module.exports = function(app, passport, db) {
     });
 
 // message board routes ===============================================================
+    app.get('/updatelibrary', isLoggedIn, function(req, res) {
+      db.collection('messages').find().toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('updatelibrary', {
+          user : req.user,
+          messages: result
+        })
+      })
+    });
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+    app.post('/books', (req, res) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/profile')
+        res.render('userlogin')
       })
     })
 
