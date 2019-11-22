@@ -48,12 +48,45 @@
 									<header class="major">
 										<h1>Welcome, User Name</h1>
 									</header>
-									<a href="/updatelibrary"><button class="button">Add a Book to Library</button></a>
-									
+									<a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
+									<h2 id="content">Your Current Library</h2>
+									<p>Here is a list of the current books in your library.</p>
+									<section class="inner">
+										<div class="">
+											<div class="">
+												<!-- Table -->
+													<h3>Table</h3>
+													<div class=" col-6 table-wrapper">
+														<table class="col-6 col-12-medium">
+															<thead>
+																<tr>
+																	<th>Book Title</th>
+																	<th>Book Author</th>
+																	<th>Reading Level</th>
+																	<th>Description</th>
+																	<th>Update</th>
+																	<th>Delete</th>
+																</tr>
+															</thead>
+															<tbody>
+															<% for(var i=0; i<userbooks.length; i++) {%>
+																<tr>
+																	<td><%= userbooks[i].bookTitle %></td>
+																	<td><%= userbooks[i].bookAuthor %></td>
+																	<td><%= userbooks[i].level %></td>
+																	<td><%= userbooks[i].description %></td>
+																	<td><button>Update</button></td>
+																	<td><button>Delete</button></td>
+																</tr>
+															<% } %>
+															</tbody>
+														</table>
+													</div>
+											</div>
+							</div>
+						</section>
 
 									<!-- Content -->
-										<h2 id="content">Your Current Library</h2>
-										<p>Here is a list of the current books in your library.</p>
 											<div class="col-6 col-12-medium">
 												<!-- Image -->
 													<div class="box alt">

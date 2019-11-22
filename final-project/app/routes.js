@@ -9,11 +9,11 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/userlogin', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('userbooks').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('userlogin.ejs', {
             user : req.user,
-            messages: result
+            userbooks : result
           })
         })
     });
@@ -26,11 +26,11 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
     app.get('/updatelibrary', isLoggedIn, function(req, res) {
-      db.collection('messages').find().toArray((err, result) => {
+      db.collection('userbooks').find().toArray((err, result) => {
         if (err) return console.log(err)
         res.render('updatelibrary', {
           user : req.user,
-          messages: result
+          userbooks: result
         })
       })
     });
@@ -50,21 +50,6 @@ module.exports = function(app, passport, db) {
           thumbUp:req.body.thumbUp + 1
         }
       }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-    app.put('/messagesDown', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp - 1
-        }
-      },{
-        // searches through the DOM top to bottom and when the number is +1 the DOM is searched bottom to top
         sort: {_id: -1},
         upsert: true
       }, (err, result) => {
