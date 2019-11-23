@@ -61,21 +61,24 @@ delete entire book row
 ======================*/
 Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
-        alert('this works')
-        // const name = this.parentNode.parentNode.childNodes[1].innerText
-        // const msg = this.parentNode.parentNode.childNodes[3].innerText
-        // fetch('messages', {
-        //   method: 'delete',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   },
-        //   body: JSON.stringify({
-        //     'name': name,
-        //     'msg': msg
-        //   })
-        // }).then(function (response) {
-        //   window.location.reload()
-        // })
+        const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
+        const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
+        const level = this.parentNode.parentNode.childNodes[5].innerHTML
+        const description = this.parentNode.parentNode.childNodes[7].innerHTML
+        fetch('/deletebook', {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'bookTitle': bookTitle,
+            'bookAuthor': bookAuthor,
+            'level' : level,
+            'description' : description
+          })
+        }).then(function (response) {
+          window.location.reload()
+        })
       });
 });
 
