@@ -1,37 +1,51 @@
-var change = document.getElementsByClassName('.update')
-var trash = document.getElementsByClassName('.delete')
+var change = document.getElementsByClassName('update')
+var trash = document.getElementsByClassName('delete')
 
-change.addEventListener('click',()=>{
-  alert('this works')
-})
+
 Array.from(change).forEach(function(element) {
       element.addEventListener('click', function(){
+        const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
+        const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
+        const level = this.parentNode.parentNode.childNodes[5].innerHTML
+        const description = this.parentNode.parentNode.childNodes[7].innerHTML
+        fetch('/changetitle', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            'bookTitle': bookTitle,
+            'bookAuthor': bookAuthor,
+            'level':level,
+            'description' : description
+          })
+        })
+        .then(response => {
+          if (response.ok) return response.json()
+        })
+        .then(data => {
+          console.log(data)
+          window.location.reload(true)
+        })
+      });
+});
+Array.from(trash).forEach(function(element) {
+      element.addEventListener('click', function(){
         alert('this works')
-        console.log('cool')
-        // const bookTitle  = this.parentNode.parentNode.childNodes[1].innerText
-        
-        // const bookAuthor = this.parentNode.parentNode.childNodes[3].innerText
-        // const level = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
-        // const bookDescription = this.parentNode.parentNode.childNodes
+        // const name = this.parentNode.parentNode.childNodes[1].innerText
+        // const msg = this.parentNode.parentNode.childNodes[3].innerText
         // fetch('messages', {
-        //   method: 'put',
-        //   headers: {'Content-Type': 'application/json'},
+        //   method: 'delete',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
         //   body: JSON.stringify({
         //     'name': name,
-        //     'msg': msg,
-        //     'thumbUp':thumbUp
+        //     'msg': msg
         //   })
-        // })
-        // .then(response => {
-        //   if (response.ok) return response.json()
-        // })
-        // .then(data => {
-        //   console.log(data)
-        //   window.location.reload(true)
+        // }).then(function (response) {
+        //   window.location.reload()
         // })
       });
 });
-
 
 
 // var thumbUp = document.getElementsByClassName("fa-thumbs-up");

@@ -9,7 +9,8 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/userlogin', isLoggedIn, function(req, res) {
-        db.collection('userbooks').find().toArray((err, result) => {
+      const currentUser = req.user._id
+        db.collection('userbooks').find({createdBy: req.user._id}).toArray((err, result) => {
           if (err) return console.log(err)
           res.render('userlogin.ejs', {
             user : req.user,
@@ -36,18 +37,18 @@ module.exports = function(app, passport, db) {
     });
 
     app.post('/books', (req, res) => {
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description}, (err, result) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, createdBy: req.user._id}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.render('userlogin')
       })
     })
 
-    app.put('/messages', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    app.put('/changetitle', (req, res) => {
+      db.collection('userbooks')
+      .findOneAndUpdate({bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, createdBy: req.user._id}, {
         $set: {
-          thumbUp:req.body.thumbUp + 1
+          bookTitle: req.body.bookTitle
         }
       }, {
         sort: {_id: -1},
@@ -57,8 +58,8 @@ module.exports = function(app, passport, db) {
         res.send(result)
       })
     })
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    app.delete('/userbooks', (req, res) => {
+      db.collection('userbooks').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })

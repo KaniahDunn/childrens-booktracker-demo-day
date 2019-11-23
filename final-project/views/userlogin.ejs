@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Elements - Forty by HTML5 UP</title>
+		<title>Welcome to Book Buddy</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -71,10 +71,10 @@
 															<tbody>
 															<% for(var i=0; i<userbooks.length; i++) {%>
 																<tr>
-																	<td><%= userbooks[i].bookTitle %></td>
-																	<td><%= userbooks[i].bookAuthor %></td>
-																	<td><%= userbooks[i].level %></td>
-																	<td><%= userbooks[i].description %></td>
+																	<td  contenteditable="true" class="title" ><%= userbooks[i].bookTitle %></td>
+																	<td  contenteditable="true" class="author"><%= userbooks[i].bookAuthor %></td>
+																	<td  contenteditable="true" class="level"><%= userbooks[i].level %></td>
+																	<td  contenteditable="true" class="description"><%= userbooks[i].description %></td>
 																	<td><button class="update">Update</button></td>
 																	<td><button class="delete">Delete</button></td>
 																</tr>
@@ -99,8 +99,8 @@
 							<div class="col-4"><span class="image fit"><img src="assets/example-books/booksix.jpg" alt="" /></span></div>
 							<!-- Break -->
 							<div class="col-4"><span class="image fit"><img src="assets/example-books/bookseven.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="images/pic10.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="images/pic08.jpg" alt="" /></span></div>
+							<div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
+							<div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
 						</div>
 					</div>
 				</div>
@@ -184,7 +184,7 @@
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="main.js"></script>
 
 	</body>
 </html>
