@@ -1,4 +1,5 @@
 var change = document.getElementsByClassName('update')
+
 var trash = document.getElementsByClassName('delete')
 
 /*==============================
@@ -14,9 +15,9 @@ Array.from(change).forEach(function(element) {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            'bookTitle': bookTitle,
-            'bookAuthor': bookAuthor,
-            'level':level,
+            'bookTitle' : bookTitle,
+            'bookAuthor' : bookAuthor,
+            'level' : level,
             'description' : description
           })
         })

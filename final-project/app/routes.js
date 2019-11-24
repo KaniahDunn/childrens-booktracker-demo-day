@@ -11,7 +11,9 @@ module.exports = function(app, passport, db) {
     app.get('/userlogin', isLoggedIn, function(req, res) {
       const currentUser = req.user._id
         db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
+          console.log(result);
           if (err) return console.log(err)
+
           res.render('userlogin.ejs', {
             user : req.user,
             userbooks : result
@@ -46,16 +48,15 @@ module.exports = function(app, passport, db) {
     });
 
     app.post('/books', (req, res) => {
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.user}, (err, result) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.render('userlogin')
+        res.redirect(req.get('referer'));
       })
     })
 
     app.put('/changedescription', (req, res) => {
-      db.collection('userbooks')
-      .findOneAndUpdate({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, {
+      db.collection('userbooks').findOneAndUpdate({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, {
         $set: {
           description: req.body.description
         }
@@ -100,7 +101,7 @@ module.exports = function(app, passport, db) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/userlogin', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
