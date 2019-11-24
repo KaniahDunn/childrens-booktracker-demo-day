@@ -17,7 +17,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+			<a href="/" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
 			<nav>
 				<a href="#menu">Menu</a>
 			</nav>
@@ -34,6 +34,7 @@
 			<ul class="actions stacked">
 				<li><a href="#" class="button primary fit">Get Started</a></li>
 				<li><a href="#" class="button fit">Log In</a></li>
+				<li><a href="#" class="button fit">Log Out</a></li>
 			</ul>
 		</nav>
 
@@ -67,11 +68,11 @@
 											</tr>
 										</thead>
 										<tbody>
-											<% for(var i=0; i < userbooks.length; i++) {%>
+											<% for(var i=0; i <userbooks.length; i++) {%>
 											<tr>
-												<td contenteditable="true" class="title"><%= userbooks[i].bookTitle %></td>
-												<td contenteditable="true" class="author"><%= userbooks[i].bookAuthor %></td>
-												<td contenteditable="true" class="level"><%= userbooks[i].level %></td>
+												<td class="title"><%= userbooks[i].bookTitle %></td>
+												<td class="author"><%= userbooks[i].bookAuthor %></td>
+												<td class="level"><%= userbooks[i].level %></td>
 												<td contenteditable="true" class="description"><%= userbooks[i].description %></td>
 												<td><button class="update">Update</button></td>
 												<td><button class="delete">Delete</button></td>

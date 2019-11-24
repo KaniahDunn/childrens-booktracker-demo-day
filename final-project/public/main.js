@@ -10,7 +10,7 @@ Array.from(change).forEach(function(element) {
         const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
         const level = this.parentNode.parentNode.childNodes[5].innerHTML
         const description = this.parentNode.parentNode.childNodes[7].innerHTML
-        fetch('/changetitle', {
+        fetch('/changedescription', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -30,31 +30,31 @@ Array.from(change).forEach(function(element) {
       });
 });
 
-Array.from(change).forEach(function(element) {
-  element.addEventListener('click', function(){
-    const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
-    const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
-    const level = this.parentNode.parentNode.childNodes[5].innerHTML
-    const description = this.parentNode.parentNode.childNodes[7].innerHTML
-    fetch('/changeauthor', {
-      method: 'put',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        'bookTitle': bookTitle,
-        'bookAuthor': bookAuthor,
-        'level': level,
-        'description' : description
-      })
-    })
-    .then(response => {
-      if (response.ok) return response.json()
-    })
-    .then(data => {
-      console.log(data)
-      window.location.reload(true)
-    })
-  });
-});
+// Array.from(change).forEach(function(element) {
+//   element.addEventListener('click', function(){
+//     const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
+//     const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
+//     const level = this.parentNode.parentNode.childNodes[5].innerHTML
+//     const description = this.parentNode.parentNode.childNodes[7].innerHTML
+//     fetch('/changeauthor', {
+//       method: 'put',
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify({
+//         'bookTitle': bookTitle,
+//         'bookAuthor': bookAuthor,
+//         'level': level,
+//         'description' : description
+//       })
+//     })
+//     .then(response => {
+//       if (response.ok) return response.json()
+//     })
+//     .then(data => {
+//       console.log(data)
+//       window.location.reload(true)
+//     })
+//   });
+// });
 
 /*======================
 delete entire book row
@@ -117,7 +117,7 @@ Array.from(trash).forEach(function(element) {
 //     const msg = this.parentNode.parentNode.childNodes[3].innerText
 //     const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
 //     fetch('messagesDown', {
-//       method: 'put',                                                                 
+//       method: 'put',
 //       headers: {'Content-Type': 'application/json'},
 //       body: JSON.stringify({
 //         'name': name,

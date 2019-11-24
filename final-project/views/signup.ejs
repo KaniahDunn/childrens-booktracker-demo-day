@@ -1,49 +1,86 @@
-<!doctype html>
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
+
 <head>
-    <title>21 Savage Fan Site</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+  <title>Landing - Forty by HTML5 UP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript>
+    <link rel="stylesheet" href="public/css/noscript.css" /></noscript>
 </head>
-<body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
 
-    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+<body class="is-preload">
 
-    <% if (message.length > 0) { %>
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+    <!-- Note: The "styleN" class below should match that of the banner element. -->
+    <header id="header" class="alt style2">
+      <a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+      <nav>
+        <a href="#menu">Menu</a>
+      </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="landing.html">Landing</a></li>
+        <li><a href="generic.html">Generic</a></li>
+        <li><a href="elements.html">Elements</a></li>
+      </ul>
+      <ul class="actions stacked">
+        <li><a href="#" class="button primary fit">Get Started</a></li>
+        <li><a href="/login" class="button fit">Log In</a></li>
+      </ul>
+    </nav>
+
+    <body>
+      <div>
+
+        <h1>Signup</h1>
+
+        <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
-    <% } %>
+        <% } %>
 
-    <!-- LOGIN FORM -->
-    <form action="/signup" method="post">
-        <div class="form-group">
+        <!-- LOGIN FORM -->
+        <form class="align-middle" action="/signup" method="post">
+          <div class="inner form-group">
             <label>First Name</label>
             <input type="text" class="form-control" name="firstName">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="inner form-group">
             <label>Last Name</label>
             <input type="text" class="form-control" name="lastName">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="inner form-group">
             <label>Email</label>
             <input type="text" class="form-control" name="email">
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="inner form-group">
             <label>Password</label>
             <input type="password" class="form-control" name="password">
-        </div>
+          </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
-    </form>
+          <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
 
-    <hr>
+        <hr>
 
-    <p>Already have an account? <a href="/login">Login</a></p>
-    <p>Or go <a href="/">home</a>.</p>
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Or go <a href="/">home</a>.</p>
 
-</div>
-</div>
+      </div>
+  </div>
 </body>
+
 </html>

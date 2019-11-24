@@ -10,9 +10,18 @@ module.exports = function(app, passport, db) {
     // PROFILE SECTION =========================
     app.get('/userlogin', isLoggedIn, function(req, res) {
       const currentUser = req.user._id
-        db.collection('userbooks').find({createdBy: req.user._id}).toArray((err, result) => {
+        db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
           if (err) return console.log(err)
           res.render('userlogin.ejs', {
+            user : req.user,
+            userbooks : result
+          })
+        })
+    });
+    app.get('/profile', isLoggedIn, function(req, res) {
+        db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('profile.ejs', {
             user : req.user,
             userbooks : result
           })
@@ -37,18 +46,18 @@ module.exports = function(app, passport, db) {
     });
 
     app.post('/books', (req, res) => {
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, createdBy: req.user._id}, (err, result) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.user}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.render('userlogin')
       })
     })
 
-    app.put('/changetitle', (req, res) => {
+    app.put('/changedescription', (req, res) => {
       db.collection('userbooks')
-      .findOneAndUpdate({bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, createdBy: req.user._id}, {
+      .findOneAndUpdate({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, {
         $set: {
-          bookTitle: req.body.bookTitle
+          description: req.body.description
         }
       }, {
         sort: {_id: -1},
@@ -58,20 +67,20 @@ module.exports = function(app, passport, db) {
         res.send(result)
       })
     })
-    app.put('/changeauthor', (req, res) => {
-      db.collection('userbooks')
-      .findOneAndUpdate({bookTitle: req.body.bookTitle, level: req.body.level, description: req.body.description, createdBy: req.user._id}, {
-        $set: {
-          bookAuthor: req.body.bookAuthor
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
+    // app.put('/changeauthor', (req, res) => {
+    //   db.collection('userbooks')
+    //   .findOneAndUpdate({bookTitle: req.body.bookTitle, level: req.body.level, description: req.body.description, createdBy: req.user._id}, {
+    //     $set: {
+    //       bookAuthor: req.body.bookAuthor
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //     upsert: true
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.send(result)
+    //   })
+    // })
 
     app.delete('/deletebook', (req, res) => {
       db.collection('userbooks').findOneAndDelete({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, createdBy: req.user._id}, (err, result) => {
@@ -106,7 +115,7 @@ module.exports = function(app, passport, db) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/userlogin', // redirect to the secure profile section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
