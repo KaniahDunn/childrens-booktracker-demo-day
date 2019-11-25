@@ -74,6 +74,16 @@ module.exports = function(app, passport, db) {
         res.send('Message deleted!')
       })
     })
+// User incentive choices =======================================
+app.get('/incentives', isLoggedIn, function(req, res) {
+  db.collection('incentives').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('incentives', {
+      user : req.user,
+      incentives: result
+    })
+  })
+});
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
