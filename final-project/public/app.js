@@ -10,6 +10,7 @@ Array.from(change).forEach(function(element) {
         const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
         const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
         const level = this.parentNode.parentNode.childNodes[5].innerHTML
+        console.log(level);
         const description = this.parentNode.parentNode.childNodes[7].innerHTML
         fetch('/changedescription', {
           method: 'put',
