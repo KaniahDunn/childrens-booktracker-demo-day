@@ -48,7 +48,9 @@ module.exports = function(app, passport, db) {
     });
 
     app.post('/books', (req, res) => {
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, date: req.body.date}, (err, result) => {
+      console.log("from route " + JSON.stringify(req.body));
+      let date = new Date();
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, currentDate: date.toDateString()}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect(req.get('referer'));

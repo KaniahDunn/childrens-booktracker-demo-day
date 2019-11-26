@@ -1,12 +1,17 @@
 var change = document.getElementsByClassName('update')
 
 var trash = document.getElementsByClassName('delete')
+/*========================
+scoring of books
+========================*/
 
 /*==============================
 update book content in table data sections
 ==============================*/
 Array.from(change).forEach(function(element) {
       element.addEventListener('click', function(){
+        const difficulity = document.querySelector('input[name="level"]:checked.value')
+        console.log("this is something " + difficulity);
         const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
         const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
         const level = this.parentNode.parentNode.childNodes[5].innerHTML

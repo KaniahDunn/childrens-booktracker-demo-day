@@ -13,7 +13,7 @@
 			<ul class="actions stacked">
 				<li><a href="#" class="button primary fit">Get Started</a></li>
 				<li><a href="#" class="button fit">Log In</a></li>
-				<li><a href="#" class="button fit"></a>Log Out</li>
+				<li><a href="#" class="button fit">Log Out</a></li>
 			</ul>
 		</nav>
 		<div class="inner">
@@ -30,15 +30,15 @@
 						</div>
 						<!-- Break -->
 						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-low" name="level" checked>
+							<input type="radio" id="demo-priority-low" name="level" value="Easy">
 							<label for="demo-priority-low">Easy</label>
 						</div>
 						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-normal" name="level">
+							<input type="radio" id="demo-priority-normal" name="level" value="Challenging">
 							<label for="demo-priority-normal">Challenging</label>
 						</div>
 						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-high" name="level">
+							<input type="radio" id="demo-priority-high" name="level" value="Very Hard">
 							<label for="demo-priority-high">Very Hard</label>
 						</div>
 						<!-- Break -->
@@ -48,7 +48,6 @@
 						<!-- Break -->
 						<div class="col-12">
 							<ul class="actions">
-								<input type="date" name="date" value="date" hidden>
 								<input class="userName" type="hidden" name="userName" value="<%= user.local.email %>"><br>
 								<li><input type="submit" value="Submit Book" class="primary" /></li>
 								<li><input type="reset" value="Reset" /></li>
