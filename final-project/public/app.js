@@ -1,21 +1,36 @@
 var change = document.getElementsByClassName('update')
-
 var trash = document.getElementsByClassName('delete')
+
 /*========================
 scoring of books
 ========================*/
+function countWords(){
+	s = document.getElementById("description").value;
+	s = s.replace(/(^\s*)|(\s*$)/gi,"");
+	s = s.replace(/[ ]{2,}/gi," ");
+	s = s.replace(/\n /,"\n");
+	document.getElementById("wordcount").value = s.split(' ').length;
+}
 
+// function scoringUserBooks(){
+//   countWords();
+//   var bookTitle = document.getElementsByClassName('bookTitle')
+//   var bookAuthor = document.getElementsByClassName('bookAuthor')
+//   var level = document.getElementsByClassName('level')
+//   var description = document.getElementsByClassName('description')
+//   if (level === "easy" && )
+// }
 /*==============================
 update book content in table data sections
 ==============================*/
 Array.from(change).forEach(function(element) {
       element.addEventListener('click', function(){
+        console.log(countWords());
         const difficulity = document.querySelector('input[name="level"]:checked.value')
         console.log("this is something " + difficulity);
         const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
         const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
         const level = this.parentNode.parentNode.childNodes[5].innerHTML
-        console.log(level);
         const description = this.parentNode.parentNode.childNodes[7].innerHTML
         fetch('/changedescription', {
           method: 'put',

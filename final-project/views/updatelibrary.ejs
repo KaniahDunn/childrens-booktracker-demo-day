@@ -1,59 +1,59 @@
 <div class="is-preload">
 
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Menu -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="landing.html">Landing</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
-			</ul>
-			<ul class="actions stacked">
-				<li><a href="#" class="button primary fit">Get Started</a></li>
-				<li><a href="#" class="button fit">Log In</a></li>
-				<li><a href="#" class="button fit">Log Out</a></li>
-			</ul>
-		</nav>
-		<div class="inner">
-			<div class="col-6 col-12-medium inner">
-				<h3>Upload a New Book</h3>
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Menu -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="landing.html">Landing</a></li>
+        <li><a href="generic.html">Generic</a></li>
+        <li><a href="elements.html">Elements</a></li>
+      </ul>
+      <ul class="actions stacked">
+        <li><a href="#" class="button primary fit">Get Started</a></li>
+        <li><a href="#" class="button fit">Log In</a></li>
+        <li><a href="#" class="button fit">Log Out</a></li>
+      </ul>
+    </nav>
+    <div class="inner">
+      <div class="col-6 col-12-medium inner">
+        <h3>Upload a New Book</h3>
 
-				<form method="post" action="/books">
-					<div class="row gtr-uniform">
-						<div class="col-6 col-12-xsmall">
-							<input type="text" name="bookTitle" id="" value="" placeholder="Book Title" />
-						</div>
-						<div class="col-6 col-12-xsmall">
-							<input type="text" name="bookAuthor" id="demo-email" value="" placeholder="Book Author" />
-						</div>
-						<!-- Break -->
-						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-low" name="level" value="Easy">
-							<label for="demo-priority-low">Easy</label>
-						</div>
-						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-normal" name="level" value="Challenging">
-							<label for="demo-priority-normal">Challenging</label>
-						</div>
-						<div class="col-4 col-12-small">
-							<input type="radio" id="demo-priority-high" name="level" value="Very Hard">
-							<label for="demo-priority-high">Very Hard</label>
-						</div>
-						<!-- Break -->
-						<div class="col-12">
-							<textarea name="description" id="demo-message" placeholder="Please give a Description of the Main ideas of the Book" rows="6"></textarea>
-						</div>
-						<!-- Break -->
-						<div class="col-12">
-							<ul class="actions">
-								<input class="userName" type="hidden" name="userName" value="<%= user.local.email %>"><br>
-								<li><input type="submit" value="Submit Book" class="primary" /></li>
-								<li><input type="reset" value="Reset" /></li>
-							</ul>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
+        <form method="post" action="/books">
+          <div class="row gtr-uniform">
+            <div class="col-6 col-12-xsmall">
+              <input type="text" name="bookTitle" id="" value="" placeholder="Book Title" />
+            </div>
+            <div class="col-6 col-12-xsmall">
+              <input type="text" name="bookAuthor" id="demo-email" value="" placeholder="Book Author" />
+            </div>
+            <!-- Break -->
+            <div class="col-4 col-12-small">
+              <input type="radio" id="demo-priority-low" name="level" value="Easy">
+              <label for="demo-priority-low">Easy</label>
+            </div>
+            <div class="col-4 col-12-small">
+              <input type="radio" id="demo-priority-normal" name="level" value="Challenging">
+              <label for="demo-priority-normal">Challenging</label>
+            </div>
+            <div class="col-4 col-12-small">
+              <input type="radio" id="demo-priority-high" name="level" value="Very Hard">
+              <label for="demo-priority-high">Very Hard</label>
+            </div>
+            <!-- Break -->
+            <div class="col-12">
+              <textarea name="description" id="demo-message" placeholder="Please give a Description of the Main ideas of the Book" rows="6"></textarea>
+            </div>
+            <!-- Break -->
+            <div class="col-12">
+              <ul class="actions">
+                <input class="userName" type="hidden" name="userName" value="<%= user.local.email %>"><br>
+                <li><input type="submit" value="Submit Book" class="primary" /></li>
+                <li><input type="reset" value="Reset" /></li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
