@@ -12,14 +12,14 @@ function countWords(){
 	document.getElementById("wordcount").value = s.split(' ').length;
 }
 
-// function scoringUserBooks(){
-//   countWords();
-//   var bookTitle = document.getElementsByClassName('bookTitle')
-//   var bookAuthor = document.getElementsByClassName('bookAuthor')
-//   var level = document.getElementsByClassName('level')
-//   var description = document.getElementsByClassName('description')
-//   if (level === "easy" && )
-// }
+const scoringUserBooks()=>{
+  countWords();
+  var bookTitle = document.getElementsByClassName('bookTitle')
+  var bookAuthor = document.getElementsByClassName('bookAuthor')
+  var level = document.getElementsByClassName('level')
+  var description = document.getElementsByClassName('description')
+  if (level === "easy" && )
+}
 /*==============================
 update book content in table data sections
 ==============================*/

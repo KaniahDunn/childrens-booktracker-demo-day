@@ -1,4 +1,4 @@
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport, db, multer, ObjectId) {
 
 // normal routes ===============================================================
 
@@ -20,6 +20,7 @@ module.exports = function(app, passport, db) {
           })
         })
     });
+
     app.get('/profile', isLoggedIn, function(req, res) {
         db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
           if (err) return console.log(err)
@@ -50,7 +51,7 @@ module.exports = function(app, passport, db) {
     app.post('/books', (req, res) => {
       console.log("from route " + JSON.stringify(req.body));
       let date = new Date();
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, currentDate: date.toDateString()}, (err, result) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString()}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect(req.get('referer'));
@@ -86,6 +87,53 @@ app.get('/incentives', isLoggedIn, function(req, res) {
     })
   })
 });
+
+//---------------------------------------
+// IMAGE CODE
+//---------------------------------------
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, 'public/images/uploads')
+//     },
+//     filename: (req, file, cb) => {
+//       cb(null, file.fieldname + '-' + Date.now() + ".png")
+//     }
+// });
+// var upload = multer({storage: storage});
+//
+// app.post('/up', upload.single('file-to-upload'), (req, res, next) => {
+//
+//     insertDocuments(db, req, 'images/uploads/' + req.file.filename, () => {
+//         //db.close();
+//         //res.json({'message': 'File uploaded successfully'});
+//         res.redirect('/profile')
+//     });
+// });
+//
+// var insertDocuments = function(db, req, filePath, callback) {
+//     var collection = db.collection('users');
+//     var uId = ObjectId(req.session.passport.user)
+//     collection.findOneAndUpdate({"_id": uId}, {
+//       $set: {
+//         profileImg: filePath
+//       }
+//     }, {
+//       sort: {_id: -1},
+//       upsert: false
+//     }, (err, result) => {
+//       if (err) return res.send(err)
+//       callback(result)
+//     })
+    // collection.findOne({"_id": uId}, (err, result) => {
+    //     //{'imagePath' : filePath }
+    //     //assert.equal(err, null);
+    //     callback(result);
+    // });
+// }
+//---------------------------------------
+// IMAGE CODE END
+//---------------------------------------
+
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
