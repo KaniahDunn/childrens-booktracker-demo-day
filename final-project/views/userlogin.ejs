@@ -1,97 +1,112 @@
 <div class="is-preload">
 
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Menu -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="/">Home</a></li>
-				<li><a href="landing.html">Landing</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
-			</ul>
-			<ul class="actions stacked">
-				<li><a href="#" class="button primary fit">Get Started</a></li>
-				<li><a href="#" class="button fit">My Profile</a></li>
-				<li><a href="/" class="button fit">Log Out</a></li>
-			</ul>
-		</nav>
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Menu -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="landing.html">Landing</a></li>
+        <li><a href="generic.html">Generic</a></li>
+        <li><a href="elements.html">Elements</a></li>
+      </ul>
+      <ul class="actions stacked">
+        <li><a href="#" class="button primary fit">Get Started</a></li>
+        <li><a href="#" class="button fit">My Profile</a></li>
+        <li><a href="/" class="button fit">Log Out</a></li>
+      </ul>
+    </nav>
 
-		<!-- Main -->
-		<div id="main" class="alt">
+    <!-- Main -->
+    <div id="main" class="alt">
 
-			<!-- One -->
-			<section id="one">
-				<div class="inner">
-					<header class="major">
-						<h1>Welcome, <%= user.local.firstName %></h1>
-					</header>
-					<a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
-					<h2 id="content">Your Current Library</h2>
-					<p>Here is a list of the current books in your library.</p>
-					<section class="inner">
-						<div class="">
-							<div class="">
-								<!-- Table -->
-								<h3>Table</h3>
-								<div class=" col-6 table-wrapper">
-									<table class="col-6 col-12-medium">
-										<thead>
-											<tr>
-												<th>Book Title</th>
-												<th>Book Author</th>
-												<th>Reading Level</th>
-												<th>Description</th>
-												<th>Update</th>
-												<th>Delete</th>
-											</tr>
-										</thead>
-										<tbody>
-											<% for(var i=0; i <userbooks.length; i++) {%>
-											<tr>
-												<td class="title"><%= userbooks[i].bookTitle %></td>
-												<td class="author"><%= userbooks[i].bookAuthor %></td>
-												<td class="level"><%= userbooks[i].level %></td>
-												<td contenteditable="true" class="description"><%= userbooks[i].description %></td>
-												<td><button class="update">Update</button></td>
-												<td><button class="delete">Delete</button></td>
-											</tr>
-											<% } %>
-										</tbody>
-									</table>
+      <!-- One -->
+      <section id="one">
+        <div class="inner">
+          <header class="major">
+            <h1>Welcome, <%= user.local.firstName %></h1>
+          </header>
+          <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
+          <h2 id="content">Check out all the read books in your library!</h2>
+          <!-- <section class="inner">
+            <div class="">
+              <div class=""> -->
+                <!-- Table -->
+                <!-- <h3>Table</h3>
+                <div class=" col-6 table-wrapper">
+                  <table class="col-6 col-12-medium">
+                    <thead>
+                      <tr>
+                        <th>Book Title</th>
+                        <th>Book Author</th>
+                        <th>Reading Level</th>
+                        <th>Description</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody> -->
+										<!-- !!! place holder for old table code!!!  -->
+                    <!-- </tbody> -->
+                  <!-- </table> -->
+                <!-- </div>
+              </div>
+            </div> -->
+          <!-- </section> -->
+          <!-- Content -->
+          <div class="col-6 col-12-medium">
+            <!-- Image -->
+            <div class="box alt">
+              <div class="row gtr-50 gtr-uniform">
+								<% for(var i=0; i <userbooks.length; i++) {%>
+                <div class="col-4">
+									<span class="image fit">
+										<h3><%= userbooks[i].bookTitle %></h3>
+										<span><%= userbooks[i].bookAuthor %></span><br>
+										<span><%= userbooks[i].level %></span>
+										<img src="assets/example-books/bookone.jpg" alt="" />
+										<button class="editButton" type="button" name="edit">Edit</button>
+										<button class="trashButton"type="button" name="trash">Delete</button>
+									</span>
 								</div>
-							</div>
-						</div>
-					</section>
-					<section>
-						<button href="/incentives" class="align-right" type="button" name="button">Select an Incentive</button>
-					</section>
-					<!-- Content -->
-					<!-- <div class="col-6 col-12-medium"> -->
-					<!-- Image -->
-					<!-- <div class="box alt">
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-4"><span class="image fit"><img src="assets/example-books/bookone.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="assets/example-books/bookfour.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="assets/example-books/bookthree.jpg" alt="" /></span></div>
-							Break -->
-					<!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/booktwo .jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="assets/example-books/bookfive.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="assets/example-books/booksix.jpg" alt="" /></span></div> -->
-					<!-- Break -->
-					<!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/bookseven.jpg" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
-							<div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-					<!-- Elements -->
-					<!-- <section class="inner">
+							 <% } %>
+
+
+                <!-- <div class="col-4">
+									<span class="image fit">
+										<img src="assets/example-books/bookfour.jpg" alt="" />
+										<button type="button" name="button">edit</button>
+										<button type="button" name="button">Delete</button>
+									</span>
+								</div>
+                <div class="col-4">
+									<span class="image fit">
+										<img src="assets/example-books/bookthree.jpg" alt="" />
+										<button type="button" name="button">edit</button>
+										<button type="button" name="button">Delete</button>
+									</span>
+								</div> -->
+                <!-- Break -->
+                <!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/booktwo .jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div>
+                <div class="col-4"><span class="image fit"><img src="assets/example-books/bookfive.jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div>
+                <div class="col-4"><span class="image fit"><img src="assets/example-books/booksix.jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div> -->
+                <!-- Break -->
+                <!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/bookseven.jpg" alt="" /></span></div>
+                <div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
+                <div class="col-4"><span class="image fit"><img src="" alt="" /></span></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+				<section>
+					<button href="/incentives" class="align" type="button" name="button">Select an Incentive</button>
+				</section>
+        <!-- Elements -->
+        <!-- <section class="inner">
 						<div class="">
 							<div class=""> -->
-								<!-- Table -->
-								<!-- <h3>Table</h3>
+        <!-- Table -->
+        <!-- <h3>Table</h3>
 								<div class=" col-6 table-wrapper">
 									<table class="col-6 col-12-medium">
 										<thead>
@@ -139,6 +154,6 @@
 							</div>
 						</div>
 					</section> -->
-				</div>
-		</div>
+    </div>
+  </div>
 </div>

@@ -47,9 +47,15 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         })
       })
     });
+    app.get('/editbook/:userbooks_id', isLoggedIn, function(req, res) {
+      db.collection('userbooks').findOne({_id: new ObjectId(req.params.userbooks_id)}, (err, databaseResult) =>{
+        res.render('edit.ejs', {
+          userbooks: databaseResult
+        });
+      })
+    });
 
     app.post('/books', (req, res) => {
-      console.log("from route " + JSON.stringify(req.body));
       let date = new Date();
       db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString()}, (err, result) => {
         if (err) return console.log(err)
@@ -88,9 +94,9 @@ app.get('/incentives', isLoggedIn, function(req, res) {
   })
 });
 
-//---------------------------------------
+// ---------------------------------------
 // IMAGE CODE
-//---------------------------------------
+// ---------------------------------------
 // var storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
 //       cb(null, 'public/images/uploads')
@@ -124,15 +130,15 @@ app.get('/incentives', isLoggedIn, function(req, res) {
 //       if (err) return res.send(err)
 //       callback(result)
 //     })
-    // collection.findOne({"_id": uId}, (err, result) => {
-    //     //{'imagePath' : filePath }
-    //     //assert.equal(err, null);
-    //     callback(result);
-    // });
+//     collection.findOne({"_id": uId}, (err, result) => {
+//         //{'imagePath' : filePath }
+//         //assert.equal(err, null);
+//         callback(result);
+//     });
 // }
-//---------------------------------------
+// ---------------------------------------
 // IMAGE CODE END
-//---------------------------------------
+// ---------------------------------------
 
 
 // =============================================================================
