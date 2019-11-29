@@ -47,10 +47,11 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         })
       })
     });
-    app.get('/editbook/:userbooks_id', isLoggedIn, function(req, res) {
+
+    app.put('/editbook/:userbooks_id', isLoggedIn, function(req, res) {
       db.collection('userbooks').findOne({_id: new ObjectId(req.params.userbooks_id)}, (err, databaseResult) =>{
-        res.render('edit.ejs', {
-          userbooks: databaseResult
+        res.render('edit', {
+          userbook: databaseResult
         });
       })
     });
@@ -78,11 +79,13 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       })
     })
     app.delete('/deletebook', (req, res) => {
-      db.collection('userbooks').findOneAndDelete({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description}, (err, result) => {
+      db.collection('userbooks').findOneAndDelete({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
     })
+
+
 // User incentive choices =======================================
 app.get('/incentives', isLoggedIn, function(req, res) {
   db.collection('incentives').find().toArray((err, result) => {
