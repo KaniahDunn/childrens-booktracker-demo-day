@@ -2,6 +2,7 @@
 
   <!-- Wrapper -->
   <div id="wrapper">
+    <!-- Menu -->
     <nav id="menu">
       <ul class="links">
         <li><a href="/">Home</a></li>
@@ -11,32 +12,147 @@
       </ul>
       <ul class="actions stacked">
         <li><a href="#" class="button primary fit">Get Started</a></li>
-        <li><a href="#" class="button fit">Log In</a></li>
-        <li><a href="/signup" class="button fit">Sign Up</a></li>
+        <li><a href="#" class="button fit">My Profile</a></li>
+        <li><a href="/" class="button fit">Log Out</a></li>
       </ul>
     </nav>
-    <div class="container inner">
-      <div class="inner">
 
-        <h1>Hello, <%= user.local.firstName %></h1>
-        <p>Resize this responsive page to see the effect!</p>
-        <div class="row">
-          <div class="col-sm-4">
-            <h3>Column 1</h3>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-          <div class="col-sm-4">
-            <h3>Column 2</h3>
-            <p>Lorem ipsum dolor..</p>
-          </div>
-          <div class="col-sm-4">
-            <h3>Column 3</h3>
-            <p>Lorem ipsum dolor..</p>
+    <!-- Main -->
+    <div id="main" class="alt">
+
+      <!-- One -->
+      <section id="one">
+        <div class="inner">
+          <header class="major">
+            <h1>Welcome, <%= user.local.firstName %></h1>
+          </header>
+          <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
+          <h2 id="content">Check out all the read books in your library!</h2>
+          <!-- <section class="inner">
+            <div class="">
+              <div class=""> -->
+                <!-- Table -->
+                <!-- <h3>Table</h3>
+                <div class=" col-6 table-wrapper">
+                  <table class="col-6 col-12-medium">
+                    <thead>
+                      <tr>
+                        <th>Book Title</th>
+                        <th>Book Author</th>
+                        <th>Reading Level</th>
+                        <th>Description</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody> -->
+										<!-- !!! place holder for old table code!!!  -->
+                    <!-- </tbody> -->
+                  <!-- </table> -->
+                <!-- </div>
+              </div>
+            </div> -->
+          <!-- </section> -->
+          <!-- Content -->
+          <div class="col-6 col-12-medium">
+            <!-- Image -->
+            <div class="box alt">
+              <div class="row gtr-50 gtr-uniform">
+								<% for(var i=0; i <userbooks.length; i++) {%>
+                <div class="col-4">
+									<span class="image fit">
+										<h3><%= userbooks[i].bookTitle %></h3>
+										<span><%= userbooks[i].bookAuthor %></span>
+										<span><%= userbooks[i].level %></span>
+										<img src="assets/example-books/bookone.jpg" alt="" />
+                    <a class="bookId" href="/book/<%= userbooks[i]._id %>">Edit</a>
+                    <button class="trashButton" type="button" name="trash">Delete</button>
+									</span>
+
+								</div>
+							 <% } %>
+                <!-- <div class="col-4">
+									<span class="image fit">
+										<img src="assets/example-books/bookfour.jpg" alt="" />
+										<button type="button" name="button">edit</button>
+										<button type="button" name="button">Delete</button>
+									</span>
+								</div>
+                <div class="col-4">
+									<span class="image fit">
+										<img src="assets/example-books/bookthree.jpg" alt="" />
+										<button type="button" name="button">edit</button>
+										<button type="button" name="button">Delete</button>
+									</span>
+								</div> -->
+                <!-- Break -->
+                <!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/booktwo .jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div>
+                <div class="col-4"><span class="image fit"><img src="assets/example-books/bookfive.jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div>
+                <div class="col-4"><span class="image fit"><img src="assets/example-books/booksix.jpg" alt="" /><button type="button" name="button">edit</button>  <button type="button" name="button">Delete</button></span></div> -->
+                <!-- Break -->
+                <!-- <div class="col-4"><span class="image fit"><img src="assets/example-books/bookseven.jpg" alt="" /></span></div>
+                <div class="col-4"><span class="image fit"><img src="" alt="" /></span></div>
+                <div class="col-4"><span class="image fit"><img src="" alt="" /></span></div> -->
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-
+				<section>
+					<button href="/incentives" class="align" type="button" name="button">Select an Incentive</button>
+				</section>
+        <!-- Elements -->
+        <!-- <section class="inner">
+						<div class="">
+							<div class=""> -->
+        <!-- Table -->
+        <!-- <h3>Table</h3>
+								<div class=" col-6 table-wrapper">
+									<table class="col-6 col-12-medium">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Description</th>
+												<th>Price</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Item1</td>
+												<td>Ante turpis integer aliquet porttitor.</td>
+												<td>29.99</td>
+											</tr>
+											<tr>
+												<td>Item2</td>
+												<td>Vis ac commodo adipiscing arcu aliquet.</td>
+												<td>19.99</td>
+											</tr>
+											<tr>
+												<td>Item3</td>
+												<td> Morbi faucibus arcu accumsan lorem.</td>
+												<td>29.99</td>
+											</tr>
+											<tr>
+												<td>Item4</td>
+												<td>Vitae integer tempus condimentum.</td>
+												<td>19.99</td>
+											</tr>
+											<tr>
+												<td>Item5</td>
+												<td>Ante turpis integer aliquet porttitor.</td>
+												<td>29.99</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="2"></td>
+												<td>100.00</td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</section> -->
     </div>
   </div>
 </div>

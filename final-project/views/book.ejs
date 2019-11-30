@@ -1,0 +1,32 @@
+<div class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Menu -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="landing.html">Landing</a></li>
+        <li><a href="generic.html">Generic</a></li>
+        <li><a href="elements.html">Elements</a></li>
+      </ul>
+      <ul class="actions stacked">
+        <li><a href="#" class="button primary fit">Get Started</a></li>
+        <li><a href="#" class="button fit">My Profile</a></li>
+        <li><a href="/" class="button fit">Log Out</a></li>
+      </ul>
+    </nav>
+     <div id="main" class="alt">
+       <h1>Book Title</h1>
+       <input id="bookTitle" type="text" name="" value="<%= userbooks.bookTitle %>">
+       <h2>Book Author</h2>
+       <input id="bookAuthor" type="text" name="" value="<%= userbooks.bookAuthor %>">
+       <h2>Book Level</h2>
+       <input id="level" type="text" name="" value="<%= userbooks.level %>">
+       <h2>Book Description</h2>
+       <textarea id="description" name="name" rows="8" cols="80"><%= userbooks.description %></textarea>
+       <button data-userId="<%= userbooks._id %>" id="changesButton" type="submit" name="button">Save Changes</button>
+      </div>
+    <!-- Main -->
+
+
+  </div>

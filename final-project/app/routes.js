@@ -1,4 +1,5 @@
 module.exports = function(app, passport, db, multer, ObjectId) {
+var ObjectId = require('mongodb').ObjectID
 
 // normal routes ===============================================================
 
@@ -8,22 +9,11 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     });
 
     // PROFILE SECTION =========================
-    app.get('/userlogin', isLoggedIn, function(req, res) {
+    app.get('/profile', isLoggedIn, function(req, res) {
       const currentUser = req.user._id
         db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
-          console.log(result);
           if (err) return console.log(err)
 
-          res.render('userlogin.ejs', {
-            user : req.user,
-            userbooks : result
-          })
-        })
-    });
-
-    app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
-          if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
             userbooks : result
@@ -31,13 +21,14 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         })
     });
 
+
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
 
-// user book list routes =========================================
+// profile routes =========================================
     app.get('/updatelibrary', isLoggedIn, function(req, res) {
       db.collection('userbooks').find().toArray((err, result) => {
         if (err) return console.log(err)
@@ -48,13 +39,18 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       })
     });
 
-    app.put('/editbook/:userbooks_id', isLoggedIn, function(req, res) {
-      db.collection('userbooks').findOne({_id: new ObjectId(req.params.userbooks_id)}, (err, databaseResult) =>{
-        res.render('edit', {
-          userbook: databaseResult
-        });
-      })
-    });
+    // localhost:2000/book?userbooks_id=book
+    app.get('/book/:id', isLoggedIn, function(req, res) {
+    // console.log('the query request is ' + req.query);
+     let queryParam = req.params.id
+     db.collection('userbooks').findOne({ _id : ObjectId(queryParam)}, (err, result) => {
+       if (err) return console.log(err)
+       res.render('book.ejs', {
+         user : req.user,
+         userbooks: result
+       })
+     });
+ });
 
     app.post('/books', (req, res) => {
       let date = new Date();
@@ -65,9 +61,13 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       })
     })
 
-    app.put('/changedescription', (req, res) => {
-      db.collection('userbooks').findOneAndUpdate({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, {
+    app.put('/updatebook', (req, res) => {
+      console.log("this is the request body " + req.body.userId);
+      db.collection('userbooks').findOneAndUpdate({_id: ObjectId(req.body.userId)}, {
         $set: {
+          bookTitle: req.body.bookTitle,
+          bookAuthor : req.body.bookAuthor,
+          level : req.body.level,
           description: req.body.description
         }
       }, {
@@ -75,10 +75,11 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         upsert: true
       }, (err, result) => {
         if (err) return res.send(err)
-        res.send(result)
+        res.render('profile')
       })
     })
-    app.delete('/deletebook', (req, res) => {
+
+    app.delete('/books', (req, res) => {
       db.collection('userbooks').findOneAndDelete({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
@@ -157,7 +158,7 @@ app.get('/incentives', isLoggedIn, function(req, res) {
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/userlogin', // redirect to the secure profile section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -170,7 +171,7 @@ app.get('/incentives', isLoggedIn, function(req, res) {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/userlogin', // redirect to the secure profile section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -188,7 +189,7 @@ app.get('/incentives', isLoggedIn, function(req, res) {
         user.local.email    = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('/userlogin');
+            res.redirect('/profile');
         });
     });
 

@@ -1,58 +1,63 @@
-
 var change = document.getElementsByClassName('update')
 var trash = document.getElementsByClassName('delete')
 var editbtn = document.getElementsByClassName('editButton')
 var trashbtn = document.getElementsByClassName('trashButton')
+var changesButton = document.getElementById('changesButton')
 
-
-Array.from(editbtn).forEach(function(element) {
-      element.addEventListener('click', function(){
-        const bookTitle  = this.parentNode.parentNode.childNodes[1].childNodes[1].innerHTML
-        const bookAuthor = this.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML
-        const level = this.parentNode.parentNode.childNodes[1].childNodes[5].innerHTML
-        const img = this.parentNode.parentNode.childNodes[1].childNodes[7]
-        fetch('editbook', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            'bookTitle' : bookTitle,
-            'bookAuthor' : bookAuthor,
-            'level' : level,
-            'img': img
-          })
-        })
-        .then(response => {
-          if (response.ok) return response.json()
-        })
-        .then(data => {
-          console.log(data)
-          window.location.reload(true)
-        })
-      });
+changesButton.addEventListener('click', function (){
+    const bookTitle = document.getElementById('bookTitle').value
+    const bookAuthor = document.getElementById('bookAuthor').value
+    const level = document.getElementById('level').value
+    const description = document.getElementById('description').value
+    const userId = this.getAttribute('data-userId')
+    console.log(userId);
+    // const img = this.parentNode.parentNode.childNodes[1].childNodes[7]
+    fetch('/updatebook', {
+      method: 'put',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'bookTitle' : bookTitle,
+        'bookAuthor' : bookAuthor,
+        'level' : level,
+        'description' : description,
+        'userId' : userId
+        // 'img': img
+      })
+    })
+      .then(response => {
+        if (response.ok) return response.ejs
+      })
+      .then(data => {
+        console.log(data)
+        window.location.href = "/profile"
+      })
 });
 /*======================
-delete entire book row
+delete book
 ======================*/
 Array.from(trashbtn).forEach(function(element) {
       element.addEventListener('click', function(){
-        const bookTitle  = this.parentNode.parentNode.childNodes[1].childNodes[1].innerHTML
-        const bookAuthor = this.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML
-        const level = this.parentNode.parentNode.childNodes[1].childNodes[5].innerHTML
-        const img = this.parentNode.parentNode.childNodes[1].childNodes[7]
-        fetch('/deletebook', {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            'bookTitle': bookTitle,
-            'bookAuthor': bookAuthor,
-            'level' : level,
-            'img': img
-          })
-        }).then(function (response) {
-          window.location.reload()
-        })
+        alert('this works')
+        // const bookTitle  = this.parentNode.parentNode.childNodes[1].childNodes[1].innerHTML
+        // const bookAuthor = this.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML
+        // const level = this.parentNode.parentNode.childNodes[1].childNodes[5].innerHTML
+        // const img = this.parentNode.parentNode.childNodes[1].childNodes[7]
+        // const achorTag = this.parentNode.parentNode.childNodes[1].childNodes[9]
+        // console.log(anchorTag);
+        // fetch('/books', {
+        //   method: 'delete',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   body: JSON.stringify({
+        //     'bookTitle': bookTitle,
+        //     'bookAuthor': bookAuthor,
+        //     'level' : level,
+        //     'img': img
+        //   })
+        // }).then(function (response) {
+        //   window.location.reload()
+        // })
       });
 });
 /*==============================
