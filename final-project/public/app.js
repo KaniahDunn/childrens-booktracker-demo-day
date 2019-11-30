@@ -4,8 +4,6 @@ var editbtn = document.getElementsByClassName('editButton')
 var trashbtn = document.getElementsByClassName('trashButton')
 var changesButton = document.getElementById('changesButton')
 
-
-console.log(trashbtn);
 /*======================
 delete book
 ======================*/
@@ -33,35 +31,23 @@ Array.from(trashbtn).forEach(function(element) {
         })
       });
 });
-/*==============================
-update book content in table data sections
-==============================*/
-// Array.from(change).forEach(function(element) {
-//       element.addEventListener('click', function(){
-//         const bookTitle  = this.parentNode.parentNode.childNodes[1].innerHTML
-//         const bookAuthor = this.parentNode.parentNode.childNodes[3].innerHTML
-//         const level = this.parentNode.parentNode.childNodes[5].innerHTML
-//         const description = this.parentNode.parentNode.childNodes[7].innerHTML
-//         fetch('/changedescription', {
-//           method: 'put',
-//           headers: {'Content-Type': 'application/json'},
-//           body: JSON.stringify({
-//             'bookTitle' : bookTitle,
-//             'bookAuthor' : bookAuthor,
-//             'level' : level,
-//             'description' : description
-//           })
-//         })
-//         .then(response => {
-//           if (response.ok) return response.json()
-//         })
-//         .then(data => {
-//           console.log(data)
-//           window.location.reload(true)
-//         })
-//       });
-// });
-//
+
+function count_word( val ){
+    var wom = val.match(/\S+/g);
+    return {
+        words : wom ? wom.length : 0
+    };
+}
+var textContent = document.getElementById("demo-message");
+var showWordCount   = document.getElementById("countWord");
+textContent.addEventListener("input", function(){
+  var v = count_word( this.value );
+  showWordCount.innerHTML = (
+      "<br>Words: "+ v.words
+  );
+}, false);
+
+
 // /*========================
 // scoring of books
 // ========================*/
