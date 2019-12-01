@@ -39,12 +39,8 @@
                     <h3><%= userbooks[i].bookTitle %></h3>
                     <span><%= userbooks[i].bookAuthor %></span>
                     <span><%= userbooks[i].level %></span>
-                    <img src="assets/example-books/add-book-image.png" alt="" />
+                    <img src="<%= userbooks[i].bookImage %>" alt="" />
                     <a class="bookId" href="/book/<%= userbooks[i]._id %>">Edit</a>
-                    <form action="/up" enctype="multipart/form-data" method="post">
-                      <input type="file" name="file-to-upload">
-                      <input type="submit" value="Upload">
-                    </form>
                     <button class="trashButton" type="button" name="trash">Delete</button>
                   </span>
 

@@ -1,6 +1,6 @@
 module.exports = function(app, passport, db, multer, ObjectId) {
+var multer = require('multer');
 var ObjectId = require('mongodb').ObjectID
-
 
 // normal routes ===============================================================
 
@@ -52,17 +52,16 @@ var ObjectId = require('mongodb').ObjectID
      });
  });
 
-    app.post('/books', (req, res) => {
-      let date = new Date();
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
-        if (err) return console.log(err)
-        console.log('saved to database')
-        res.redirect(req.get('referer'));
-      })
-    })
+    // app.post('/books', (req, res) => {
+    //   let date = new Date();
+    //   db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
+    //     if (err) return console.log(err)
+    //     console.log('saved to database')
+    //     res.redirect(req.get('referer'));
+    //   })
+    // })
 
     app.put('/updatebook', (req, res) => {
-      console.log("this is the request body " + req.body.userId);
       db.collection('userbooks').findOneAndUpdate({_id: ObjectId(req.body.userId)}, {
         $set: {
           bookTitle: req.body.bookTitle,
@@ -116,50 +115,47 @@ app.get('/incentives', isLoggedIn, function(req, res) {
 // ---------------------------------------
 // IMAGE CODE
 // ---------------------------------------
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, 'public/images/uploads')
-//     },
-//     filename: (req, file, cb) => {
-//       cb(null, file.fieldname + '-' + Date.now() + ".png")
-//     }
-// });
-// var upload = multer({storage: storage});
-//
-// app.post('/up', upload.single('file-to-upload'), (req, res, next) => {
-//
-//     insertDocuments(db, req, 'images/uploads/' + req.file.filename, () => {
-//         //db.close();
-//         //res.json({'message': 'File uploaded successfully'});
-//         res.redirect('/profile')
-//     });
-// });
-//
-// var insertDocuments = function(db, req, filePath, callback) {
-//     var collection = db.collection('users');
-//     var uId = ObjectId(req.session.passport.user)
-//     collection.findOneAndUpdate({"_id": uId}, {
-//       $set: {
-//         profileImg: filePath
-//       }
-//     }, {
-//       sort: {_id: -1},
-//       upsert: false
-//     }, (err, result) => {
-//       if (err) return res.send(err)
-//       callback(result)
-//     })
-//     collection.findOne({"_id": uId}, (err, result) => {
-//         //{'imagePath' : filePath }
-//         //assert.equal(err, null);
-//         callback(result);
-//     });
-// }
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/images/uploads')
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + ".png")
+    }
+});
+var upload = multer({storage: storage});
+
+app.post('/books', upload.single('file-to-upload'), (req, res, next) => {
+    console.log('this is the filename' + req.file.filename);
+    insertDocuments(db, req, 'images/uploads/' + req.file.filename, () => {
+        //db.close();
+        //res.json({'message': 'File uploaded successfully'});
+        res.redirect('/profile')
+    });
+});
+
+var insertDocuments = function(db, req, filePath, callback) {
+    var collection = db.collection('userbooks');
+    var uId = ObjectId(req.body.userId)
+    let date = new Date();
+    collection.save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount, bookImage: filePath}, (err, result) => {
+      if (err) return res.send(err)
+      callback(result)
+    })
+}
+
+
+    // app.post('/books', (req, res) => {
+    //   let date = new Date();
+    //   db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
+    //     if (err) return console.log(err)
+    //     console.log('saved to database')
+    //     res.redirect(req.get('referer'));
+    //   })
+    // })
 // ---------------------------------------
 // IMAGE CODE END
 // ---------------------------------------
-
-
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
