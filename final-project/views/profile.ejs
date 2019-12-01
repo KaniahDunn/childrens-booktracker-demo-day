@@ -33,26 +33,30 @@
             <!-- Image -->
             <div class="box alt">
               <div class="row gtr-50 gtr-uniform">
-								<% for(var i=0; i <userbooks.length; i++) {%>
+                <% for(var i=0; i <userbooks.length; i++) {%>
                 <div class="col-4">
-									<span class="image fit">
-										<h3><%= userbooks[i].bookTitle %></h3>
-										<span><%= userbooks[i].bookAuthor %></span>
-										<span><%= userbooks[i].level %></span>
-										<img src="assets/example-books/bookone.jpg" alt="" />
+                  <span class="image fit">
+                    <h3><%= userbooks[i].bookTitle %></h3>
+                    <span><%= userbooks[i].bookAuthor %></span>
+                    <span><%= userbooks[i].level %></span>
+                    <img src="assets/example-books/add-book-image.png" alt="" />
                     <a class="bookId" href="/book/<%= userbooks[i]._id %>">Edit</a>
+                    <form action="/up" enctype="multipart/form-data" method="post">
+                      <input type="file" name="file-to-upload">
+                      <input type="submit" value="Upload">
+                    </form>
                     <button class="trashButton" type="button" name="trash">Delete</button>
-									</span>
+                  </span>
 
-								</div>
-							 <% } %>
+                </div>
+                <% } %>
               </div>
             </div>
           </div>
         </div>
-				<section>
-					<button href="/incentives" class="align" type="button" name="button">Select an Incentive</button>
-				</section>
+        <section>
+          <button href="/incentives" class="align" type="button" name="button">Select an Incentive</button>
+        </section>
     </div>
   </div>
 </div>
