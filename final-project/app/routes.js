@@ -1,6 +1,7 @@
 module.exports = function(app, passport, db, multer, ObjectId) {
 var ObjectId = require('mongodb').ObjectID
 
+
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
@@ -13,7 +14,6 @@ var ObjectId = require('mongodb').ObjectID
       const currentUser = req.user._id
         db.collection('userbooks').find({user: req.user.local.email}).toArray((err, result) => {
           if (err) return console.log(err)
-
           res.render('profile.ejs', {
             user : req.user,
             userbooks : result
@@ -54,7 +54,7 @@ var ObjectId = require('mongodb').ObjectID
 
     app.post('/books', (req, res) => {
       let date = new Date();
-      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString()}, (err, result) => {
+      db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect(req.get('referer'));
@@ -78,6 +78,21 @@ var ObjectId = require('mongodb').ObjectID
         res.render('profile')
       })
     })
+    // 
+    // app.put('/wordcount', (req, res) => {
+    //   console.log("this is the request body " + req.body.userId);
+    //   db.collection('userbooks').findOneAndUpdate({_id: ObjectId(req.body.userId)}, {
+    //     $set: {
+    //       wordcount: req.body.wordcount
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //     upsert: true
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.render('profile')
+    //   })
+    // })
 
     app.delete('/books', (req, res) => {
       db.collection('userbooks').findOneAndDelete({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level}, (err, result) => {

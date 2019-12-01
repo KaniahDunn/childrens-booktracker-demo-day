@@ -45,9 +45,21 @@ textContent.addEventListener("input", function(){
   showWordCount.innerHTML = (
       "<br>Words: "+ v.words
   );
+  console.log(v.words);
 }, false);
 
-
+// const userId = this.getAttribute('data-userId')
+// fetch('/wordcount', {
+//   method: 'put',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     'wordcount': v.words,
+//     'userId' : userId
+//   })
+// }).then(function (response) {
+//   window.location.reload()
 // /*========================
 // scoring of books
 // ========================*/
