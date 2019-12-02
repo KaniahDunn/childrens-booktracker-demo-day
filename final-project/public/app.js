@@ -42,10 +42,9 @@ var textContent = document.getElementById("demo-message");
 var showWordCount   = document.getElementById("countWord");
 textContent.addEventListener("input", function(){
   var v = count_word( this.value );
-  showWordCount.innerHTML = (
-      "<br>Words: "+ v.words
+  showWordCount.value = (
+    v.words
   );
-  console.log(v.words);
 }, false);
 
 // const userId = this.getAttribute('data-userId')
