@@ -46,35 +46,3 @@ textContent.addEventListener("input", function(){
     v.words
   );
 }, false);
-
-// const userId = this.getAttribute('data-userId')
-// fetch('/wordcount', {
-//   method: 'put',
-//   headers: {
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     'wordcount': v.words,
-//     'userId' : userId
-//   })
-// }).then(function (response) {
-//   window.location.reload()
-// /*========================
-// scoring of books
-// ========================*/
-// function countWords(){
-// 	s = document.getElementById("description").value;
-// 	s = s.replace(/(^\s*)|(\s*$)/gi,"");
-// 	s = s.replace(/[ ]{2,}/gi," ");
-// 	s = s.replace(/\n /,"\n");
-// 	document.getElementById("wordcount").value = s.split(' ').length;
-// }
-//
-// const scoringUserBooks()=>{
-//   countWords();
-//   var bookTitle = document.getElementsByClassName('bookTitle')
-//   var bookAuthor = document.getElementsByClassName('bookAuthor')
-//   var level = document.getElementsByClassName('level')
-//   var description = document.getElementsByClassName('description')
-//   if (level === "easy" && )
-// }

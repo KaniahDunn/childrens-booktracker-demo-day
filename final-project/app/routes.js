@@ -56,15 +56,6 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     });
   });
 
-  // app.post('/books', (req, res) => {
-  //   let date = new Date();
-  //   db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
-  //     if (err) return console.log(err)
-  //     console.log('saved to database')
-  //     res.redirect(req.get('referer'));
-  //   })
-  // })
-
   app.put('/updatebook', (req, res) => {
     db.collection('userbooks').findOneAndUpdate({
       _id: ObjectId(req.body.userId)
@@ -85,21 +76,6 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       res.render('profile')
     })
   })
-  //
-  // app.put('/wordcount', (req, res) => {
-  //   console.log("this is the request body " + req.body.userId);
-  //   db.collection('userbooks').findOneAndUpdate({_id: ObjectId(req.body.userId)}, {
-  //     $set: {
-  //       wordcount: req.body.wordcount
-  //     }
-  //   }, {
-  //     sort: {_id: -1},
-  //     upsert: true
-  //   }, (err, result) => {
-  //     if (err) return res.send(err)
-  //     res.render('profile')
-  //   })
-  // })
 
   app.delete('/books', (req, res) => {
     db.collection('userbooks').findOneAndDelete({
@@ -124,9 +100,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   });
 
-  // ---------------------------------------
-  // IMAGE CODE
-  // ---------------------------------------
+// upload book form with image
   var storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'public/images/uploads')
@@ -140,7 +114,8 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   });
 
   app.post('/books', upload.single('file-to-upload'), (req, res, next) => {
-    console.log('this is the filename' + req.file.filename);
+
+
     insertDocuments(db, req, 'images/uploads/' + req.file.filename, () => {
       //db.close();
       //res.json({'message': 'File uploaded successfully'});
@@ -149,6 +124,15 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   });
 
   var insertDocuments = function(db, req, filePath, callback) {
+    const points = () => {
+      const level = req.body.level
+      const wordCount = req.body.wordCount
+
+      return level.length + wordCount
+    }
+
+    console.log('derp', points)
+
     var collection = db.collection('userbooks');
     var uId = ObjectId(req.body.userId)
     let date = new Date();
@@ -160,25 +144,14 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       user: req.body.userName,
       dateAdded: date.toDateString(),
       wordCount: parseInt(req.body.wordCount),
-      bookImage: filePath
+      bookImage: filePath,
+      bookPoints: points()
     }, (err, result) => {
       if (err) return res.send(err)
       callback(result)
     })
   }
 
-
-  // app.post('/books', (req, res) => {
-  //   let date = new Date();
-  //   db.collection('userbooks').save({bookTitle: req.body.bookTitle, bookAuthor: req.body.bookAuthor, level: req.body.level, description: req.body.description, user: req.body.userName, dateAdded: date.toDateString(), wordCount: req.body.wordCount}, (err, result) => {
-  //     if (err) return console.log(err)
-  //     console.log('saved to database')
-  //     res.redirect(req.get('referer'));
-  //   })
-  // })
-  // ---------------------------------------
-  // IMAGE CODE END
-  // ---------------------------------------
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
   // =============================================================================

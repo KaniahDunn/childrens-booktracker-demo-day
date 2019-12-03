@@ -6,13 +6,10 @@
     <nav id="menu">
       <ul class="links">
         <li><a href="/">Home</a></li>
-        <li><a href="landing.html">Landing</a></li>
-        <li><a href="generic.html">Generic</a></li>
-        <li><a href="elements.html">Elements</a></li>
+        <li><a href="/incentives">Incentives</a></li>
       </ul>
       <ul class="actions stacked">
-        <li><a href="#" class="button primary fit">Get Started</a></li>
-        <li><a href="#" class="button fit">My Profile</a></li>
+        <li><a href="#" class="button primary fit">My Profile</a></li>
         <li><a href="/" class="button fit">Log Out</a></li>
       </ul>
     </nav>
@@ -27,6 +24,7 @@
             <h1>Welcome, <%= user.local.firstName %></h1>
             <h3 id="content">Check out all the read books in your library!</h3>
             <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
+            <a href="/incentives"><button type="button" name="button">Select an Incentive</button></a>
           </header>
           <!-- Content -->
           <div class="col-6 col-12-medium">
@@ -39,8 +37,8 @@
                     <h3><%= userbooks[i].bookTitle %></h3>
                     <span><%= userbooks[i].bookAuthor %></span>
                     <span><%= userbooks[i].level %></span>
-                    <img src="<%= userbooks[i].bookImage %>" alt="" />
-                    <a class="bookId" href="/book/<%= userbooks[i]._id %>">Edit</a>
+                    <img id="libraryImage" src="<%= userbooks[i].bookImage %>" alt="" />
+                    <a class="bookId" href="/book/<%= userbooks[i]._id %>">EDIT</a>
                     <button class="trashButton" type="button" name="trash">Delete</button>
                   </span>
 
@@ -50,9 +48,6 @@
             </div>
           </div>
         </div>
-        <section>
-          <button type="button" name="button"><a href="/incentives">Select an Incentive</a></button>
-        </section>
     </div>
   </div>
 </div>
