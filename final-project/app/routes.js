@@ -93,9 +93,18 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   app.get('/incentives', isLoggedIn, function(req, res) {
     db.collection('incentives').find().toArray((err, result) => {
       if (err) return console.log(err)
-      res.render('incentives', {
-        user: req.user,
-        incentives: result
+      db.collection('userbooks').find({
+        user: req.user.local.email
+      }).toArray((bookError, bookResult) =>{
+        let bookSum = 0;
+        for(let i = 0; i < bookResult.length; i++){
+          bookSum += bookResult[i].bookPoints
+        }
+        res.render('incentives', {
+          user: req.user,
+          bookSum: bookSum,
+          incentives: result,
+        })
       })
     })
   });
@@ -127,11 +136,35 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     const points = () => {
       const level = req.body.level
       const wordCount = req.body.wordCount
-
-      return level.length + wordCount
+      if (level === "Easy"){
+        if (wordCount <= 20){
+          return 100
+        }else if(wordCount <= 50){
+          return 200
+        }else{
+          return 300
+        }
+      }else if(level === "Challenging"){
+        if (wordCount <= 50){
+          return 101
+        }else if(wordCount <= 80){
+          return 201
+        }else{
+          return 301
+        }
+      }else if (level === "Very Hard"){
+        if (wordCount <= 80){
+          return 102
+        }else if(wordCount <= 100){
+          return 202
+        }else{
+          return 302
+        }
+      }else{
+        console.log(`Unexpected level ${level}`)
+      }
     }
-
-    console.log('derp', points)
+    console.log(points)
 
     var collection = db.collection('userbooks');
     var uId = ObjectId(req.body.userId)

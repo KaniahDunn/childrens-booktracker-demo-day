@@ -24,12 +24,14 @@
           <div class="">
             <!-- Table -->
             <h3>Table</h3>
+            <h3><%= bookSum %></h3>
             <div class=" col-6 table-wrapper">
               <table class="col-6 col-12-medium">
                 <thead>
                   <tr>
                     <th>Business</th>
                     <th>Coupon</th>
+                    <th>Points</th>
                     <th>Select</th>
                   </tr>
                 </thead>
@@ -38,7 +40,12 @@
                   <tr>
                     <td><%= incentives[i].business %></td>
                     <td><%= incentives[i].coupon %></td>
-                    <td><button class="incentivesButton" type="button" name="button">Select</button></td>
+                    <td><%= incentives[i].points %></td>
+                    <td>
+                      <% if(bookSum > incentives[i].points){ %>
+                        <button class="incentivesButton" type="button" name="incentiveButton">Select</button>
+                      <% } %>
+                    </td>
                   </tr>
                 </tbody>
                 <% } %>
