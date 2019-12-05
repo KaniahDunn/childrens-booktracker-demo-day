@@ -6,7 +6,8 @@
     <nav id="menu">
       <ul class="links">
         <li><a href="/">Home</a></li>
-        <li><a href="/incentives">Incentives</a></li>
+        <li><a href="/incentives">My Incentives</a></li>
+        <li><a href="/updatelibrary">Add a Book to Library</a></li>
       </ul>
       <ul class="actions stacked">
         <li><a href="#" class="button primary fit">My Profile</a></li>
@@ -24,7 +25,7 @@
             <h1>Welcome, <%= user.local.firstName %></h1>
             <h3 id="content">Check out all the read books in your library!</h3>
             <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
-            <a href="/incentives"><button type="button" name="button">Select an Incentive</button></a>
+            <a href="/incentives"><button class="incentives" type="button" name="button">My Incentives</button></a>
           </header>
           <!-- Content -->
           <div class="col-6 col-12-medium">

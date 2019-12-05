@@ -76,6 +76,26 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       res.render('profile')
     })
   })
+  app.put('/selectIncentives', (req, res) => {
+    db.collection('userbooks').findOneAndUpdate({
+      _id: ObjectId(req.body.userId)
+    }, {
+      $set: {
+        bookTitle: req.body.bookTitle,
+        bookAuthor: req.body.bookAuthor,
+        level: req.body.level,
+        description: req.body.description
+      }
+    }, {
+      sort: {
+        _id: -1
+      },
+      upsert: true
+    }, (err, result) => {
+      if (err) return res.send(err)
+      res.render('profile')
+    })
+  })
 
   app.delete('/books', (req, res) => {
     db.collection('userbooks').findOneAndDelete({
