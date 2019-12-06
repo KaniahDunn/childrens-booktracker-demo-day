@@ -76,15 +76,15 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       res.render('profile')
     })
   })
+
   app.put('/selectIncentives', (req, res) => {
-    db.collection('userbooks').findOneAndUpdate({
-      _id: ObjectId(req.body.userId)
+    let incentiveId = ObjectId(req.body._id);
+    console.log(incentiveId);
+    db.collection('incentives').findOneAndUpdate({
+      _id: incentiveId
     }, {
       $set: {
-        bookTitle: req.body.bookTitle,
-        bookAuthor: req.body.bookAuthor,
-        level: req.body.level,
-        description: req.body.description
+        selected: true
       }
     }, {
       sort: {
@@ -93,7 +93,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       upsert: true
     }, (err, result) => {
       if (err) return res.send(err)
-      res.render('profile')
+      res.render('incentives')
     })
   })
 
@@ -115,9 +115,9 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       if (err) return console.log(err)
       db.collection('userbooks').find({
         user: req.user.local.email
-      }).toArray((bookError, bookResult) =>{
+      }).toArray((bookError, bookResult) => {
         let bookSum = 0;
-        for(let i = 0; i < bookResult.length; i++){
+        for (let i = 0; i < bookResult.length; i++) {
           bookSum += bookResult[i].bookPoints
         }
         res.render('incentives', {
@@ -129,7 +129,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   });
 
-// upload book form with image
+  // upload book form with image
   var storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'public/images/uploads')
@@ -156,31 +156,31 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     const points = () => {
       const level = req.body.level
       const wordCount = req.body.wordCount
-      if (level === "Easy"){
-        if (wordCount <= 20){
+      if (level === "Easy") {
+        if (wordCount <= 20) {
           return 100
-        }else if(wordCount <= 50){
+        } else if (wordCount <= 50) {
           return 200
-        }else{
+        } else {
           return 300
         }
-      }else if(level === "Challenging"){
-        if (wordCount <= 50){
+      } else if (level === "Challenging") {
+        if (wordCount <= 50) {
           return 101
-        }else if(wordCount <= 80){
+        } else if (wordCount <= 80) {
           return 201
-        }else{
+        } else {
           return 301
         }
-      }else if (level === "Very Hard"){
-        if (wordCount <= 80){
+      } else if (level === "Very Hard") {
+        if (wordCount <= 80) {
           return 102
-        }else if(wordCount <= 100){
+        } else if (wordCount <= 100) {
           return 202
-        }else{
+        } else {
           return 302
         }
-      }else{
+      } else {
         console.log(`Unexpected level ${level}`)
       }
     }

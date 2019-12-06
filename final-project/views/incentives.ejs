@@ -10,7 +10,7 @@
       </ul>
       <ul class="actions stacked">
         <li><a href="/profile" class="button fit">My Profile</a></li>
-        <li><a href="#" class="button fit">Log Out</a></li>
+        <li><a href="/" class="button fit">Log Out</a></li>
       </ul>
     </nav>
 
@@ -30,14 +30,17 @@
                     <th>Coupon</th>
                     <th>Points</th>
                     <th>Select</th>
+                    <th hidden>Id</th>
                   </tr>
                 </thead>
                 <tbody>
                   <% for(var i=0; i <incentives.length; i++) {%>
+                    <% if (incentives[i].selected !== true){%>
                   <tr>
                     <td><%= incentives[i].business %></td>
                     <td><%= incentives[i].coupon %></td>
                     <td><%= incentives[i].points %></td>
+                    <td hidden><%= incentives[i]._id %></td>
                     <td>
                       <% if(bookSum > incentives[i].points){ %>
                         <button class="incentivesButton" type="button" name="incentiveButton">Select</button>
@@ -45,30 +48,36 @@
                     </td>
                   </tr>
                 </tbody>
+                  <% } %>
                 <% } %>
-                <!-- <tfoot>
-                  <tr>
-                    <td colspan="2"></td>
-                    <td>100.00</td>
-                  </tr>
-                </tfoot> -->
               </table>
+            </div>
 
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+            <h3>My Incentives</h3>
+            <div class=" col-6 table-wrapper">
+              <table class="col-6 col-12-medium">
+                <thead>
+                  <tr>
+                    <th>Business</th>
+                    <th>Coupon</th>
+                    <th>Points</th>
+                    <th>Select</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=0; i <incentives.length; i++) {%>
+                    <% if (incentives[i].selected === true){%>
+                  <tr>
+                    <td><%= incentives[i].business %></td>
+                    <td><%= incentives[i].coupon %></td>
+                    <td><%= incentives[i].points %></td>
+                    <td>
+                    </td>
+                  </tr>
+                </tbody>
+                  <% } %>
+                <% } %>
+              </table>
             </div>
           </div>
         </div>
