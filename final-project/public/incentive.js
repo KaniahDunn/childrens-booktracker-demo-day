@@ -1,4 +1,6 @@
 var incentivesBtn = document.getElementsByName('incentiveButton')
+var beginning = document.getElementsByClassName('bookSum').value
+var ending = document.getElementsByClassName('selectedincentive').value
 
 Array.from(incentivesBtn).forEach(function(element) {
       element.addEventListener('click', function(){
@@ -18,7 +20,14 @@ Array.from(incentivesBtn).forEach(function(element) {
             '_id': incentiveId
           })
         }).then(function (response) {
-          window.location.reload()
+          window.location.reload(getTotalPoints())
         })
     });
 });
+
+
+function getTotalPoints() {
+  let total = beginning - ending
+}
+
+console.log(beginning);

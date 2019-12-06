@@ -109,7 +109,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   // User incentive choices =======================================
   app.get('/incentives', isLoggedIn, function(req, res) {
     db.collection('incentives').find().toArray((err, result) => {
-      let bookSum = 1000;
+      let bookSum = 0;
       if (err) return console.log(err)
       db.collection('userbooks').find({
         user: req.user.local.email

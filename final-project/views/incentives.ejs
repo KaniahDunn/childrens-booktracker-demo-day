@@ -21,7 +21,7 @@
           <div class="">
             <!-- Table -->
             <h3>Choose an Incentive</h3>
-            <h3><%= bookSum %></h3>
+            <h3 class="bookSum" ><%= bookSum %></h3>
             <div class=" col-6 table-wrapper">
               <table class="col-6 col-12-medium">
                 <thead>
@@ -69,7 +69,7 @@
                   <tr>
                     <td><%= userIncentives[i].business %></td>
                     <td><%= userIncentives[i].coupon %></td>
-                    <td><%= userIncentives[i].points %></td>
+                    <td class="selectedincentive" ><%= userIncentives[i].points %></td>
                     <td>
                     </td>
                   </tr>
