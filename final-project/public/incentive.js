@@ -7,7 +7,7 @@ Array.from(incentivesBtn).forEach(function(element) {
         const points = this.parentNode.parentNode.childNodes[5].innerHTML
         const incentiveId = this.parentNode.parentNode.childNodes[7].innerHTML
         fetch('/selectIncentives', {
-          method: 'put',
+          method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },

@@ -65,17 +65,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for(var i=0; i <incentives.length; i++) {%>
-                    <% if (incentives[i].selected === true){%>
+                  <% for(var i=0; i < userIncentives.length; i++) {%>
                   <tr>
-                    <td><%= incentives[i].business %></td>
-                    <td><%= incentives[i].coupon %></td>
-                    <td><%= incentives[i].points %></td>
+                    <td><%= userIncentives[i].business %></td>
+                    <td><%= userIncentives[i].coupon %></td>
+                    <td><%= userIncentives[i].points %></td>
                     <td>
                     </td>
                   </tr>
                 </tbody>
-                  <% } %>
                 <% } %>
               </table>
             </div>

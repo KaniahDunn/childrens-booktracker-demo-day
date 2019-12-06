@@ -77,25 +77,22 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   })
 
-  app.put('/selectIncentives', (req, res) => {
+  app.post('/selectIncentives', (req, res) => {
     let incentiveId = ObjectId(req.body._id);
-    console.log(incentiveId);
-    db.collection('incentives').findOneAndUpdate({
-      _id: incentiveId
-    }, {
-      $set: {
-        selected: true
-      }
-    }, {
-      sort: {
-        _id: -1
-      },
-      upsert: true
-    }, (err, result) => {
+    const incentive = {
+    'business': req.body.business,
+    'coupon': req.body.coupon,
+    'points' : parseInt(req.body.points),
+    '_id': ObjectId(req.body.incentiveId)
+    }
+    db.collection('userIncentives').save(incentive, (err, result) => {
       if (err) return res.send(err)
-      res.render('incentives')
+      res.render('incentives', {
+        userIncentives: result
+      })
     })
   })
+
 
   app.delete('/books', (req, res) => {
     db.collection('userbooks').findOneAndDelete({
@@ -112,18 +109,22 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   // User incentive choices =======================================
   app.get('/incentives', isLoggedIn, function(req, res) {
     db.collection('incentives').find().toArray((err, result) => {
+      let bookSum = 1000;
       if (err) return console.log(err)
       db.collection('userbooks').find({
         user: req.user.local.email
       }).toArray((bookError, bookResult) => {
-        let bookSum = 0;
         for (let i = 0; i < bookResult.length; i++) {
           bookSum += bookResult[i].bookPoints
         }
-        res.render('incentives', {
-          user: req.user,
-          bookSum: bookSum,
-          incentives: result,
+        db.collection('userIncentives').find().toArray((err, incentiveResult) =>{
+          if (err) return console.log(err);
+          res.render('incentives', {
+            user: req.user,
+            bookSum: bookSum,
+            incentives: result,
+            userIncentives : incentiveResult
+          })
         })
       })
     })
