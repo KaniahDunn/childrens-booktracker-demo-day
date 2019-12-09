@@ -6,25 +6,26 @@
       <ul class="links">
         <li><a href="/">Home</a></li>
         <li><a href="/profile">My Profile</a></li>
-        <li><a href="generic.html">Generic</a></li>
-        <li><a href="elements.html">Elements</a></li>
+        <li><a href="/forum">See New Reads</a></li>
       </ul>
       <ul class="actions stacked">
         <li><a href="/" class="button fit">Log Out</a></li>
       </ul>
     </nav>
-     <div id="main" class="alt">
-       <h1>Book Title</h1>
-       <input id="bookTitle" type="text" name="" value="<%= userbooks.bookTitle %>">
-       <h2>Book Author</h2>
-       <input id="bookAuthor" type="text" name="" value="<%= userbooks.bookAuthor %>">
-       <h2>Book Level</h2>
-       <input id="level" type="text" name="" value="<%= userbooks.level %>">
-       <h2>Book Description</h2>
-       <textarea id="description" name="name" rows="8" cols="80"><%= userbooks.description %></textarea>
-       <button data-userId="<%= userbooks._id %>" id="changesButton" type="submit" name="button">Save Changes</button>
+     <div id="col-6 col-12-medium" class="alt">
+       <div class="inner">
+         <h1>Make Changes to Your Book Below</h1>
+         <h2>Book Title</h2>
+         <input id="bookTitle" type="text" name="" value="<%= userbooks.bookTitle %>">
+         <h2>Book Author</h2>
+         <input id="bookAuthor" type="text" name="" value="<%= userbooks.bookAuthor %>">
+         <h2>Book Level</h2>
+         <input id="level" type="text" name="" value="<%= userbooks.level %>">
+         <h2>Book Description</h2>
+         <textarea id="description" name="name" rows="8" cols="80"><%= userbooks.description %></textarea>
+         <h3>Dont forget to save!</h3>
+         <button data-userId="<%= userbooks._id %>" id="changesButton" type="submit" name="button">Save Changes</button>
+       </div>
+
       </div>
-    <!-- Main -->
-
-
   </div>

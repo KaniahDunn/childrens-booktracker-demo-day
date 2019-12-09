@@ -1,6 +1,8 @@
 module.exports = function(app, passport, db, multer, ObjectId) {
+  var nodemailer = require('nodemailer');
   var multer = require('multer');
   var ObjectId = require('mongodb').ObjectID
+
 
   // normal routes ===============================================================
 
@@ -206,6 +208,17 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   }
 
+// forum page ==================================================
+app.get('/forum', function(req, res) {
+    db.collection('userbooks').find().toArray((err, result) => {
+      if (err) return console.log(err)
+      res.render('forum.ejs', {
+        user : req.user,
+        userbooks: result
+      })
+    })
+});
+
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
   // =============================================================================
@@ -267,3 +280,4 @@ function isLoggedIn(req, res, next) {
 
   res.redirect('/');
 }
+// meahtaetujrridkx
