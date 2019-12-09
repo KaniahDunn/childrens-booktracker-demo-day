@@ -1,0 +1,73 @@
+<div class="is-preload">
+
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Menu -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/incentives">My Incentives</a></li>
+        <li><a href="/updatelibrary">Add a Book to Library</a></li>
+      </ul>
+      <ul class="actions stacked">
+        <li><a href="/profile" class="button primary fit">My Profile</a></li>
+        <li><a href="/" class="button fit">Log Out</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main" class="alt">
+      <section class="forumOne">
+        <header class="major">
+          <h2>Find Inspiration</h2>
+        </header>
+      </section>
+      <!-- One -->
+      <section class="forumTwo">
+        <div class="inner">
+          <header class="major">
+            <h1>See what people are reading</h1>
+          </header>
+          <!-- Content -->
+
+          <div class="col-6 col-12-medium">
+            <!-- Image -->
+            <div class="box alt">
+              <div class="row gtr-50 gtr-uniform">
+                <% for(var i = userbooks.length - 1; i >= 0; i--) {%>
+                <ul>
+                  <li class="forumList">
+                    <div class="forumBookInfo">
+                      <h3>Book Title: <%= userbooks[i].bookTitle %></h3>
+                      <span class="forumAuthor">Author: <%= userbooks[i].bookAuthor %></span>
+                      <img class="forumImage" src="<%= userbooks[i].bookImage %>" alt="" />
+                    </div>
+                    <% } %>
+
+                    <% for(var i = comments.length - 1; i >= 0; i--) {%>
+                    <div class="forumBookComment">
+                      <h4>Comments</h4>
+                      <ul>
+                        <li>
+                          <span></span>
+                          <span><i class="fas fa-heart"></i></span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <form class="" action="/comment" method="post">
+                        <textarea name="comment" rows="2" cols="80" placeholder="Add a Comment"></textarea>
+                        <button type="submit" name="button">Submit</button>
+                      </form>
+                    </div>
+                  </li>
+                </ul>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

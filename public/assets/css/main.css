@@ -3972,3 +3972,35 @@ input, select, textarea {
 			margin-top: 2%;
 			margin-right: 4%;
 		}
+		.forumBookInfo{
+			float: left;
+			width: 50%;
+
+		}
+		.forumList{
+			list-style: none;
+		}
+		.forumBookComment{
+			float: left;
+			width: 50%
+		}
+		.forumImage{
+			width: 80%;
+			height: 343px;
+		}
+		.forumAuthor{
+			clear: both;
+		}
+		.forumOne{
+			border: 1px solid white;
+			float: left;
+			width: 30%;
+		}
+		.forumTwo{
+			border: 1px solid white;
+			float: left;
+			width: 70%;
+		}
+		#footer{
+			clear: both;
+		}

@@ -24,10 +24,3 @@ Array.from(incentivesBtn).forEach(function(element) {
         })
     });
 });
-
-
-function getTotalPoints() {
-  let total = beginning - ending
-}
-
-console.log(beginning);

@@ -219,6 +219,13 @@ app.get('/forum', function(req, res) {
     })
 });
 
+app.post('/comment', (req, res) => {
+      db.collection('comments').save({userName: req.body.userName, comment: req.body.comment}, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/forum')
+      })
+    })
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
   // =============================================================================
