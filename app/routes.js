@@ -108,8 +108,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   })
 
   app.post('/check',(req, res) =>{
-    console.log('running updateNotes')
-    db.collection('userIncentives').save({business: req.body.business,coupon: req.body.coupon,points: req.body.points, user: ObjectId(req.session.passport.user)}, (err, result) => {
+    db.collection('userIncentives').save({business: req.body.business,coupon: req.body.coupon,points: req.body.points, img: req.body.img, user: ObjectId(req.session.passport.user)}, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
       res.redirect('/incentives')

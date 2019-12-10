@@ -43,7 +43,7 @@
                     <td><%= incentives[i].coupon %></td>
                     <td><%= incentives[i].points %></td>
                     <td hidden><%= incentives[i]._id %></td>
-                    <!-- <img src="images/stickers/movie-pass.png" alt=""> -->
+                    <img src="<%= incentives[i].img %>" alt="" hidden>
                     <td>
                       <% if(bookSum > incentives[i].points){ %>
                         <form action="/check" method="post">
@@ -51,6 +51,7 @@
                           <input type="hidden" name="business" value="<%= incentives[i].business %>">
                           <input type="hidden" name="coupon" value="<%= incentives[i].coupon %>">
                           <input type="hidden" name="points" value="<%= incentives[i].points %>">
+                          <input type="hidden" name="img" value="<%= incentives[i].img %>">
                           <input type="submit" name="incentiveButton" value="select">
 
                           </form>
@@ -72,7 +73,7 @@
                   <h3><%= userIncentives[i].business %></h3>
                   <span><%= userIncentives[i].coupon %></span>
                   <span><%= userIncentives[i].points %></span>
-                  <!-- <img src="images/stickers/movie-pass.png" alt=""> -->
+                  <img id="incentiveImage" src="<%= userIncentives[i].img %>" alt="">
                 </span>
               </div>
             </div>
