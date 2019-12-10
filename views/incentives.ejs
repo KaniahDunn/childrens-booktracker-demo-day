@@ -46,7 +46,14 @@
                     <!-- <img src="images/stickers/movie-pass.png" alt=""> -->
                     <td>
                       <% if(bookSum > incentives[i].points){ %>
-                      <button class="incentivesButton" type="button" name="incentiveButton">Select</button>
+                        <form action="/check" method="post">
+                          <input type="hidden" name="incentive" value="<%= incentives[i]._id %>">
+                          <input type="hidden" name="business" value="<%= incentives[i].business %>">
+                          <input type="hidden" name="coupon" value="<%= incentives[i].coupon %>">
+                          <input type="hidden" name="points" value="<%= incentives[i].points %>">
+                          <input type="submit" name="incentiveButton" value="select">
+
+                          </form>
                       <% } %>
                     </td>
                   </tr>

@@ -107,6 +107,14 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   })
 
+  app.post('/check',(req, res) =>{
+    console.log('running updateNotes')
+    db.collection('userIncentives').save({business: req.body.business,coupon: req.body.coupon,points: req.body.points, user: ObjectId(req.session.passport.user)}, (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/incentives')
+    })
+  });
 
   // User incentive choices =======================================
   app.get('/incentives', isLoggedIn, function(req, res) {
@@ -119,7 +127,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         for (let i = 0; i < bookResult.length; i++) {
           bookSum += bookResult[i].bookPoints
         }
-        db.collection('userIncentives').find().toArray((err, incentiveResult) =>{
+        db.collection('userIncentives').find({user: ObjectId(req.session.passport.user)}).toArray((err, incentiveResult) =>{
           if (err) return console.log(err);
           res.render('incentives', {
             user: req.user,
