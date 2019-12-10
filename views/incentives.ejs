@@ -22,7 +22,7 @@
           <div class="">
             <!-- Table -->
             <h3>Choose an Incentive</h3>
-            <h3 class="bookSum" ><%= bookSum %></h3>
+            <h3 class="bookSum"><%= bookSum %></h3>
             <div class=" col-6 table-wrapper">
               <table class="col-6 col-12-medium">
                 <thead>
@@ -32,49 +32,47 @@
                     <th>Points</th>
                     <th>Select</th>
                     <th hidden>Id</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% for(var i=0; i <incentives.length; i++) {%>
-                    <% if (incentives[i].selected !== true){%>
+                  <% if (incentives[i].selected !== true){%>
                   <tr>
                     <td><%= incentives[i].business %></td>
                     <td><%= incentives[i].coupon %></td>
                     <td><%= incentives[i].points %></td>
                     <td hidden><%= incentives[i]._id %></td>
+                    <!-- <img src="images/stickers/movie-pass.png" alt=""> -->
                     <td>
                       <% if(bookSum > incentives[i].points){ %>
-                        <button class="incentivesButton" type="button" name="incentiveButton">Select</button>
+                      <button class="incentivesButton" type="button" name="incentiveButton">Select</button>
                       <% } %>
                     </td>
                   </tr>
                 </tbody>
-                  <% } %>
+                <% } %>
                 <% } %>
               </table>
             </div>
 
             <h3>My Incentives</h3>
+
+            <% for(var i=0; i < userIncentives.length; i++) {%>
             <div class=" col-6 table-wrapper">
-              <table class="col-6 col-12-medium">
-                <thead>
-                  <tr>
-                    <th>Business</th>
-                    <th>Coupon</th>
-                    <th>Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for(var i=0; i < userIncentives.length; i++) {%>
-                  <tr>
-                    <td><%= userIncentives[i].business %></td>
-                    <td><%= userIncentives[i].coupon %></td>
-                    <td class="selectedincentive" ><%= userIncentives[i].points %></td>
-                  </tr>
-                </tbody>
-                <% } %>
-              </table>
+              <div class="col-4">
+                <span class="image fit">
+                  <h3><%= userIncentives[i].business %></h3>
+                  <span><%= userIncentives[i].coupon %></span>
+                  <span><%= userIncentives[i].points %></span>
+                  <!-- <img src="images/stickers/movie-pass.png" alt=""> -->
+                </span>
+              </div>
             </div>
+            <% } %>
+
+
+
           </div>
         </div>
       </section>
