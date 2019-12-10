@@ -82,10 +82,10 @@ module.exports = function(app, passport, db, multer, ObjectId) {
   app.post('/selectIncentives', (req, res) => {
     let incentiveId = ObjectId(req.body._id);
     const incentive = {
-    'business': req.body.business,
-    'coupon': req.body.coupon,
-    'points' : parseInt(req.body.points),
-    '_id': ObjectId(req.body.incentiveId)
+      'business': req.body.business,
+      'coupon': req.body.coupon,
+      'points': parseInt(req.body.points),
+      '_id': ObjectId(req.body.incentiveId)
     }
     db.collection('userIncentives').save(incentive, (err, result) => {
       if (err) return res.send(err)
@@ -107,12 +107,37 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   })
 
-  app.post('/check',(req, res) =>{
-    db.collection('userIncentives').save({business: req.body.business,coupon: req.body.coupon,points: req.body.points, img: req.body.img, user: ObjectId(req.session.passport.user)}, (err, result) => {
-      if (err) return console.log(err)
-      console.log('saved to database')
-      res.redirect('/incentives')
-    })
+  app.post('/check', isLoggedIn, (req, res) => {
+    let bookSum = 0;
+    db.collection('userbooks').find({
+      user: req.user.local.email
+    }).toArray((bookError, bookResult) => {
+      for (let i = 0; i < bookResult.length; i++) {
+        bookSum += bookResult[i].bookPoints
+      }
+      db.collection('userIncentives').find({
+        user: ObjectId(req.session.passport.user)
+      }).toArray((err, incentiveResult) => {
+        for (let i = 0; i < incentiveResult.length; i++) {
+          bookSum -= incentiveResult[i].points
+        }
+        if (bookSum < req.body.points) {
+          res.status(500).send('Whoops, doesn\'t look like you have enough points')
+        } else {
+          db.collection('userIncentives').save({
+            business: req.body.business,
+            coupon: req.body.coupon,
+            points: req.body.points,
+            img: req.body.img,
+            user: ObjectId(req.session.passport.user)
+          }, (err, result) => {
+            if (err) return console.log(err)
+            console.log('saved to database')
+            res.redirect('/incentives')
+          })
+        }
+      });
+    });
   });
 
   // User incentive choices =======================================
@@ -126,13 +151,18 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         for (let i = 0; i < bookResult.length; i++) {
           bookSum += bookResult[i].bookPoints
         }
-        db.collection('userIncentives').find({user: ObjectId(req.session.passport.user)}).toArray((err, incentiveResult) =>{
+        db.collection('userIncentives').find({
+          user: ObjectId(req.session.passport.user)
+        }).toArray((err, incentiveResult) => {
+          for (let i = 0; i < incentiveResult.length; i++) {
+            bookSum -= incentiveResult[i].points
+          }
           if (err) return console.log(err);
           res.render('incentives', {
             user: req.user,
             bookSum: bookSum,
             incentives: result,
-            userIncentives : incentiveResult
+            userIncentives: incentiveResult
           })
         })
       })
@@ -215,24 +245,32 @@ module.exports = function(app, passport, db, multer, ObjectId) {
     })
   }
 
-// forum page ==================================================
-app.get('/forum', function(req, res) {
+  // forum page ==================================================
+  app.get('/forum', function(req, res) {
     db.collection('userbooks').find().toArray((err, result) => {
       if (err) return console.log(err)
-      res.render('forum.ejs', {
-        user : req.user,
-        userbooks: result
-      })
-    })
-});
-
-app.post('/comment', (req, res) => {
-      db.collection('comments').save({userName: req.body.userName, comment: req.body.comment}, (err, result) => {
+      db.collection('comments').find().toArray((err, commentResult) => {
         if (err) return console.log(err)
-        console.log('saved to database')
-        res.redirect('/forum')
+        res.render('forum.ejs', {
+          user: req.user,
+          userbooks: result,
+          comments: commentResult
+        })
       })
     })
+  });
+
+  app.post('/comment', isLoggedIn, (req, res) => {
+    db.collection('comments').save({
+      user: ObjectId(req.session.passport.user),
+      comment: req.body.comment,
+      bookId: req.body.bookId
+    }, (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
+      res.redirect('/forum')
+    })
+  })
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
   // =============================================================================
