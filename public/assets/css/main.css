@@ -3960,6 +3960,7 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
+
 		.bookId{
 			padding: 3% 9.5%;
 			border: 2px solid white;
@@ -3991,13 +3992,12 @@ input, select, textarea {
 		.forumAuthor{
 			clear: both;
 		}
-		.forumOne{
+		/* .forumOne{
 			border: 1px solid white;
 			float: left;
 			width: 30%;
-		}
+		} */
 		.forumTwo{
-			border: 1px solid white;
 			float: left;
 			width: 70%;
 		}
@@ -4006,7 +4006,16 @@ input, select, textarea {
 		}
 
 		#incentiveImage{
-			display: inline;
-			border: 1px solid white;
-			width: 18%;
+			width: 95%;
+		}
+		#profileHeader{
+			float: left;
+			margin-right: 10%;
+		}
+		#profileContent{
+			clear: both;
+		}
+
+		#commentList{
+			list-style: none;
 		}

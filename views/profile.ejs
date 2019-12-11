@@ -22,14 +22,17 @@
       <!-- One -->
       <section id="one">
         <div class="inner">
-          <header class="major">
-            <h1>Welcome, <%= user.local.firstName %></h1>
-            <h3 id="content">Check out all the read books in your library!</h3>
-            <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
-            <a href="/incentives"><button class="incentives" type="button" name="button">My Incentives</button></a>
+          <header id="profileHeader" class="major">
+              <h1>Welcome, <%= user.local.firstName %></h1>
+              <h3 id="content">Check out all the read books in your library!</h3>
+              <a href="/updatelibrary"><button class="button primary">Add a Book to Library</button></a>
           </header>
+          <div id="profilePoints" class="">
+            <h1>Your total book points: <%= bookSum %> </h1>
+            <a href="/incentives"><button class="incentives" type="button" name="button">My Incentives</button></a>
+          </div>
           <!-- Content -->
-          <div class="col-6 col-12-medium">
+          <div id="profileContent" class="col-6 col-12-medium">
             <!-- Image -->
             <div class="box alt">
               <div class="row gtr-50 gtr-uniform">
@@ -39,7 +42,7 @@
                     <h3><%= userbooks[i].bookTitle %></h3>
                     <span><%= userbooks[i].bookAuthor %></span>
                     <span><%= userbooks[i].level %></span>
-                    <img id="libraryImage" src="<%= userbooks[i].bookImage %>" alt="" />
+                    <img id="libraryImage" class="fluid" src="<%= userbooks[i].bookImage %>" alt="" />
                     <a class="bookId" href="/book/<%= userbooks[i]._id %>">EDIT</a>
                     <button class="trashButton" type="button" name="trash">Delete</button>
                   </span>

@@ -13,6 +13,19 @@ module.exports = function(app, passport, db, multer, ObjectId) {
 
   // PROFILE SECTION =========================
   app.get('/profile', isLoggedIn, function(req, res) {
+    let bookSum = 0;
+    db.collection('userbooks').find({
+      user: req.user.local.email
+    }).toArray((bookError, bookResult) => {
+      for (let i = 0; i < bookResult.length; i++) {
+        bookSum += bookResult[i].bookPoints
+      }
+      db.collection('userIncentives').find({
+        user: ObjectId(req.session.passport.user)
+      }).toArray((err, incentiveResult) => {
+        for (let i = 0; i < incentiveResult.length; i++) {
+          bookSum -= incentiveResult[i].points
+        }
     const currentUser = req.user._id
     db.collection('userbooks').find({
       user: req.user.local.email
@@ -20,10 +33,14 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       if (err) return console.log(err)
       res.render('profile.ejs', {
         user: req.user,
+        bookSum: bookSum,
         userbooks: result
+
       })
     })
   });
+});
+});
 
 
   // LOGOUT ==============================
@@ -254,7 +271,7 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         res.render('forum.ejs', {
           user: req.user,
           userbooks: result,
-          comments: commentResult
+          comments: commentResult,
         })
       })
     })

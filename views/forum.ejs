@@ -17,11 +17,6 @@
 
     <!-- Main -->
     <div id="main" class="alt">
-      <section class="forumOne">
-        <header class="major">
-          <h2>Find Inspiration</h2>
-        </header>
-      </section>
       <!-- One -->
       <section class="forumTwo">
         <div class="inner">
@@ -49,9 +44,9 @@
                           <ul>
                             <% for(var j = comments.length - 1; j >= 0; j--) {%>
                               <% if(userbooks[i]._id == comments[j].bookId){ %>
-                            <li>
+                            <li id="commentList">
+                              <strong><span><%= userbooks[i].user %>: </span></strong>
                               <span><%= comments[j].comment %></span>
-                              <span><i class="fas fa-heart"></i></span>
                             </li>
                             <% } %>
                           <% } %>

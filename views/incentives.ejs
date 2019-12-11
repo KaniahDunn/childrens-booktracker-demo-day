@@ -46,15 +46,15 @@
                     <img src="<%= incentives[i].img %>" alt="" hidden>
                     <td>
                       <% if(bookSum > incentives[i].points){ %>
-                        <form action="/check" method="post">
-                          <input type="hidden" name="incentive" value="<%= incentives[i]._id %>">
-                          <input type="hidden" name="business" value="<%= incentives[i].business %>">
-                          <input type="hidden" name="coupon" value="<%= incentives[i].coupon %>">
-                          <input type="hidden" name="points" value="<%= incentives[i].points %>">
-                          <input type="hidden" name="img" value="<%= incentives[i].img %>">
-                          <input type="submit" name="incentiveButton" value="select">
+                      <form action="/check" method="post">
+                        <input type="hidden" name="incentive" value="<%= incentives[i]._id %>">
+                        <input type="hidden" name="business" value="<%= incentives[i].business %>">
+                        <input type="hidden" name="coupon" value="<%= incentives[i].coupon %>">
+                        <input type="hidden" name="points" value="<%= incentives[i].points %>">
+                        <input type="hidden" name="img" value="<%= incentives[i].img %>">
+                        <input type="submit" name="incentiveButton" value="select">
 
-                          </form>
+                      </form>
                       <% } %>
                     </td>
                   </tr>
@@ -65,19 +65,23 @@
             </div>
 
             <h3>My Incentives</h3>
-
-            <% for(var i=0; i < userIncentives.length; i++) {%>
-            <div class=" col-6 table-wrapper">
-              <div class="col-4">
-                <span class="image fit">
-                  <h3><%= userIncentives[i].business %></h3>
-                  <span><%= userIncentives[i].coupon %></span>
-                  <span><%= userIncentives[i].points %></span>
-                  <img id="incentiveImage" src="<%= userIncentives[i].img %>" alt="">
-                </span>
+            <div class='container'>
+              <div row='row'>
+                <% for(var i=0; i < userIncentives.length; i++) {%>
+                <div id="selectedIncentives">
+                  <div class="col-sm-4">
+                    <span class="">
+                      <h3><%= userIncentives[i].business %></h3>
+                      <span><%= userIncentives[i].coupon %></span>
+                      <span><%= userIncentives[i].points %></span>
+                      <img id="incentiveImage" src="<%= userIncentives[i].img %>" alt="">
+                    </span>
+                  </div>
+                </div>
+                <% } %>
               </div>
             </div>
-            <% } %>
+
 
 
 
