@@ -26,21 +26,22 @@ module.exports = function(app, passport, db, multer, ObjectId) {
         for (let i = 0; i < incentiveResult.length; i++) {
           bookSum -= incentiveResult[i].points
         }
-    const currentUser = req.user._id
-    db.collection('userbooks').find({
-      user: req.user.local.email
-    }).toArray((err, result) => {
-      if (err) return console.log(err)
-      res.render('profile.ejs', {
-        user: req.user,
-        bookSum: bookSum,
-        userbooks: result
+        const currentUser = req.user._id
+        db.collection('userbooks').find({
+          user: req.user.local.email
+        }).toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('profile.ejs', {
+            user: req.user,
+            bookSum: bookSum,
+            userbooks: result
 
-      })
-    })
+          })
+        })
+      });
+    });
   });
-});
-});
+
 
 
   // LOGOUT ==============================
@@ -268,14 +269,18 @@ module.exports = function(app, passport, db, multer, ObjectId) {
       if (err) return console.log(err)
       db.collection('comments').find().toArray((err, commentResult) => {
         if (err) return console.log(err)
+        db.collection('users').find().toArray((err, usersResult) => {
+          if (err) return console.log(err)
         res.render('forum.ejs', {
           user: req.user,
           userbooks: result,
           comments: commentResult,
+          usersResult: usersResult
         })
       })
     })
   });
+});
 
   app.post('/comment', isLoggedIn, (req, res) => {
     db.collection('comments').save({

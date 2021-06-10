@@ -45,7 +45,6 @@
                             <% for(var j = comments.length - 1; j >= 0; j--) {%>
                               <% if(userbooks[i]._id == comments[j].bookId){ %>
                             <li id="commentList">
-                              <strong><span><%= userbooks[i].user %>: </span></strong>
                               <span><%= comments[j].comment %></span>
                             </li>
                             <% } %>
